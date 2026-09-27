@@ -22,6 +22,7 @@ export function meets(state: GameState, conditions: Condition[] = []) {
   return conditions.every((condition) => {
     if ("flag" in condition) return Boolean(state.flags[condition.flag]);
     if ("ending" in condition) return state.endings.includes(condition.ending);
+    if ("endingsAny" in condition) return condition.endingsAny.some((ending) => state.endings.includes(ending));
     if ("state" in condition) return Boolean(state[condition.state]) === condition.equals;
     return canUnlockEnd15(state);
   });

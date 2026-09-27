@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { validateFinal, validateInvestigation } from "../lib/game/answers.ts";
 import { endingTitles, sceneMap, scenes } from "../lib/game/scenes.ts";
-import { canUnlockEnd15, initialState } from "../lib/game/state.ts";
+import { canUnlockEnd15, initialState, meets } from "../lib/game/state.ts";
 
 test("END15 requires eight distinct endings and every required ending", () => {
   assert.equal(canUnlockEnd15({ ...initialState, endings: ["END03", "END10", "END13", "END14", "END01", "END02", "END04"] }), false);
@@ -44,4 +44,20 @@ test("investigation and final answers accept specified variants", () => {
   assert.equal(validateInvestigation(["7", "はい", "あいざわなおき"]), true);
   assert.equal(validateInvestigation(["6", "はい", "相沢直樹"]), false);
   assert.equal(validateFinal(["アイザワナオキ", "6時間16分", "くぜりゅういち", "久世隆一"]), true);
+});
+
+test("END03 uses the 22:53 record and the real wound occurs at 22:51", () => {
+  assert.equal(sceneMap.end03.text.includes("20:11"), false);
+  assert.equal(sceneMap.end03.text.includes("22:53"), true);
+  assert.equal(sceneMap.end03.image, "wound_record_2253");
+  assert.equal(sceneMap.true_wound.time, "22:51");
+  assert.equal(sceneMap.true_wound.image, "true_wound_2251");
+});
+
+test("group photo reinspection is a single OR-gated choice", () => {
+  const choices = sceneMap.murder_investigation.choices?.filter((choice) => choice.label === "集合写真再検証") ?? [];
+  assert.equal(choices.length, 1);
+  assert.equal(meets({ ...initialState, endings: ["END02"] }, choices[0].conditions), true);
+  assert.equal(meets({ ...initialState, endings: ["END13"] }, choices[0].conditions), true);
+  assert.equal(meets({ ...initialState, endings: [] }, choices[0].conditions), false);
 });

@@ -24,6 +24,7 @@ export type GameState = {
 export type Condition =
   | { flag: string }
   | { ending: string }
+  | { endingsAny: string[] }
   | { state: keyof GameState; equals: boolean }
   | { canUnlockEnd15: true };
 
