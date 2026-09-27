@@ -1,5 +1,12 @@
 export const assetSlots: Record<string, { src: string; position?: string; crop?: string }> = {
   lodge_arrival_1637: { src: "/assets/generated/lodge_arrival_1637.png", position: "center" },
+  living_seven_cups: { src: "/assets/generated/living_seven_cups.png", position: "center" },
+  receipt_1528: { src: "/assets/generated/receipt_1528.png", position: "center" },
+  room_d_charger: { src: "/assets/generated/room_d_charger.png", position: "center" },
+  unknown_camera_bag: { src: "/assets/generated/unknown_camera_bag.png", position: "center" },
+  bbq_1805: { src: "/assets/generated/bbq_1805.png", position: "center" },
+  tunnel_shrine_2202: { src: "/assets/generated/tunnel_shrine_2202.png", position: "center" },
+  lodge_blackout_2310: { src: "/assets/generated/lodge_blackout_2310.png", position: "center" },
   lodge_day: { src: "/assets/reference/02_lodge_and_kuse_suv_reference.png", position: "25% 15%" },
   lodge_night: { src: "/assets/reference/02_lodge_and_kuse_suv_reference.png", position: "70% 12%" },
   room_d_day: { src: "/assets/reference/02_lodge_and_kuse_suv_reference.png", position: "72% 58%" },
