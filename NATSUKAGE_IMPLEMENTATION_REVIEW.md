@@ -1,6 +1,6 @@
 # NATSUKAGE IMPLEMENTATION REVIEW
 
-生成日時: 2026-09-27T12:29:13.813Z
+生成日時: 2026-09-27T14:08:46.368Z
 
 > この文書は現在のソースコードから生成した実装監査資料です。仕様書上の予定ではなく、`lib/game/scenes.ts`、`state.ts`、`answers.ts`、`evidence.ts`、`assets.ts`、`app/page.tsx` の現実装を正としています。秘密情報、Cookie、環境変数の実値は含みません。
 
@@ -1417,20 +1417,25 @@
 - 本文（実表示全文）:
 
 ```text
+駐車場へ戻る。
+
+佐久間が運転席に乗り込み、キーを回す。
+
+スターターの音だけが響く。
+
+エンジンはかからない。
+
 【佐久間】
 「なんでだよ」
 
+もう一台も確認する。
+
+同じだった。
+
+ライトも、エンジンも動かない。
+
 【藤堂】
 「歩くしかない」
-
-【美咲】
-「……嘘」
-
-【小宮】
-「戻ってきた？」
-
-【悠真】
-「……車」
 ```
 
 - 会話抽出: 
@@ -1441,15 +1446,6 @@
 
 【藤堂】
 「歩くしかない」
-
-【美咲】
-「……嘘」
-
-【小宮】
-「戻ってきた？」
-
-【悠真】
-「……車」
 ```
 
 - 選択肢:
@@ -5003,7 +4999,7 @@ FINAL RECORD RESTORED
 
 ## 4. 全画像アセット一覧
 
-実ファイル数: **23**
+実ファイル数: **25**
 
 ### bbq_1805.png
 
@@ -5028,6 +5024,14 @@ FINAL RECORD RESTORED
 - asset slot: `crime_2231`
 - 使用scene: `forest_light`、`crime_photo`、`kuse_notice`、`end06`、`end07`、`true_crime`、`true_detected`
 - 用途: scene:forest_light / scene:crime_photo / scene:kuse_notice / scene:end06 / scene:end07 / scene:true_crime / scene:true_detected
+
+### damaged_name_tag.png
+
+- ファイル名: `damaged_name_tag.png`
+- パス: `public/assets/generated/damaged_name_tag.png`
+- asset slot: `damaged_name_tag`
+- 使用scene: なし
+- 用途: evidence:damaged_name_tag
 
 ### group_1718.png
 
@@ -5116,6 +5120,14 @@ FINAL RECORD RESTORED
 - asset slot: `room_d_true`
 - 使用scene: `true_room`
 - 用途: scene:true_room
+
+### survival_record.png
+
+- ファイル名: `survival_record.png`
+- パス: `public/assets/generated/survival_record.png`
+- asset slot: `survival_record`
+- 使用scene: なし
+- 用途: evidence:survival_record
 
 ### true_end_group_1723.png
 

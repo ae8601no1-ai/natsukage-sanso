@@ -61,3 +61,9 @@ test("group photo reinspection is a single OR-gated choice", () => {
   assert.equal(meets({ ...initialState, endings: ["END13"] }, choices[0].conditions), true);
   assert.equal(meets({ ...initialState, endings: [] }, choices[0].conditions), false);
 });
+
+test("the escape choice explains why the group must leave on foot", () => {
+  assert.equal(sceneMap.escape_car.text.includes("エンジンはかからない"), true);
+  assert.equal(sceneMap.escape_car.text.includes("もう一台も確認する"), true);
+  assert.deepEqual(sceneMap.escape_car.choices?.map((choice) => choice.label), ["徒歩で下山", "山荘へ戻る"]);
+});

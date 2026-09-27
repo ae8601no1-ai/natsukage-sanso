@@ -19,4 +19,6 @@ export const assetSlots: Record<string, { src: string; position?: string; crop?:
   roadcam_0625: { src: "/assets/generated/roadcam_0625.png", position: "center" },
   kuse_naoki_final: { src: "/assets/generated/kuse_naoki_final.png", position: "center" },
   room_d_true: { src: "/assets/generated/room_d_true.png", position: "center" },
+  survival_record: { src: "/assets/generated/survival_record.png", position: "center" },
+  damaged_name_tag: { src: "/assets/generated/damaged_name_tag.png", position: "center" },
 };
