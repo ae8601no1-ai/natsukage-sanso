@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { validateFinal, validateInvestigation } from "../lib/game/answers.ts";
+import { validateFinal, validateFinalFields, validateInvestigation, validateInvestigationFields } from "../lib/game/answers.ts";
 import { endingTitles, sceneMap, scenes } from "../lib/game/scenes.ts";
 import { canUnlockEnd15, initialState, meets } from "../lib/game/state.ts";
 
@@ -66,4 +66,16 @@ test("the escape choice explains why the group must leave on foot", () => {
   assert.equal(sceneMap.escape_car.text.includes("エンジンはかからない"), true);
   assert.equal(sceneMap.escape_car.text.includes("もう一台も確認する"), true);
   assert.deepEqual(sceneMap.escape_car.choices?.map((choice) => choice.label), ["徒歩で下山", "山荘へ戻る"]);
+});
+
+test("investigation answers report correctness per field", () => {
+  assert.deepEqual(validateInvestigationFields(["7", "いいえ", "相沢直樹"]), [true, false, true]);
+  assert.deepEqual(validateFinalFields(["相沢直樹", "6時間", "久世隆一", "不明"]), [true, false, true, false]);
+});
+
+test("the bridge scene contains only Yuma and Naoki and explains Yuma leaving alone", () => {
+  assert.equal(sceneMap.true_bridge.text.includes("仲間"), false);
+  assert.equal(sceneMap.true_bridge.text.includes("車"), false);
+  assert.equal(sceneMap.true_present.text.includes("周りには誰もいなかった"), true);
+  assert.equal(sceneMap.true_present.text.includes("一人で橋を離れた"), true);
 });

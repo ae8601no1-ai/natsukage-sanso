@@ -77,8 +77,8 @@ const baseScenes:Scene[]=[
   {id:"true_outside",time:"23:18",image:"lodge_blackout_2310",speaker:"小宮／森川／直樹／悠真",text:"「……いる」\n\n「追ってきた」\n\n「スマホだ」\n\n「何？」\n\n「あいつが欲しいの、これだ」",nextScene:"true_leave"},
   {id:"true_leave",time:"23:43",speaker:"直樹／悠真",text:"「あいつが欲しいのは俺のスマホだ」\n\n「だから何だよ」\n\n「俺が持ってる限り、ここに来る」\n\n「待てよ」\n\n「電波入るところまで行く」\n\n「一人で？」\n\n「みんなで動いたら目立つ」\n\n「直樹！」",nextScene:"true_road"},
   {id:"true_road",time:"23:49",speaker:"悠真／直樹",text:"「直樹！」\n\n「なんで来たんだよ！」\n\n「一人で行かせられるか！」\n\n「来た」\n\n「こっち！」",nextScene:"true_bridge"},
-  {id:"true_bridge",time:"23:54—23:56",image:"bridge",speaker:"直樹／悠真／仲間の声",text:"「これ渡るのか？」\n\n「向こうの道なら下へ出られる！」\n\n「悠真！」\n\n「直樹！」\n\n「直樹！」\n\n「悠真！」\n\n「逃げろ！」\n\n「でも直樹が！」\n\n「来るぞ！」",nextScene:"true_present"},
-  {id:"true_present",time:"現在",speaker:"悠真",text:"「……ここまでだ」\n\n「この先はない」\n\n「直樹はここで死んだ」\n\n「俺が橋に連れていった」\n\n「落ちたのに」\n\n「俺は……」\n\n「置いて逃げた」\n\n「だから何度もやり直した」",nextScene:"true_terminated"},
+  {id:"true_bridge",time:"23:54—23:56",image:"bridge",speaker:"直樹／悠真",text:"「これ渡るのか？」\n\n「向こうの道なら下へ出られる！」\n\n悠真が渡る。\n\n直樹が続く。\n\n木材が軋む。\n\n大きな音。\n\n橋の一部が崩れる。\n\n「悠真！」\n\n「直樹！」\n\n直樹が暗い谷へ落ちる。\n\n悠真は一人で崩れた橋の縁へ駆け寄る。\n\n「直樹！」\n\n下から微かな声がした。\n\nだが、言葉までは聞き取れなかった。",nextScene:"true_present"},
+  {id:"true_present",time:"現在",speaker:"悠真",text:"「……ここまでだ」\n\n「この先はない」\n\n「橋が崩れて、直樹は谷へ落ちた」\n\n「下から声が聞こえた」\n\n「まだ生きていたかもしれない」\n\n「でも、暗くて姿が見えなかった」\n\n「周りには誰もいなかった」\n\n「助けを呼ぶことも、下りる道を探すこともしなかった」\n\n「俺は怖くなって、一人で橋を離れた」\n\n「直樹を置いて逃げた」\n\n「だから、直樹はあそこで死んだと思い込んだ」\n\n「だから何度もやり直した」",nextScene:"true_terminated"},
   {id:"true_terminated",time:"RECONSTRUCTION TERMINATED",speaker:"悠真",text:"「トンネルに行かなかったら」\n\n「写真を撮らなかったら」\n\n「山荘から逃げていたら」\n\n「誰か別の奴が犯人だったら」\n\n「呪いだったら」\n\n「俺のせいじゃなかったら」\n\n「どこかに」\n\n「直樹が死なない選択肢があると思った」",nextScene:"unread_notice"},
   {id:"unread_notice",time:"ARCHIVE / UNREAD：1",speaker:"",text:"UNKNOWN FILE\n\nNAOKI_0815_0612.jpg",choices:[{label:"開く",nextScene:"unread_0612"}],effect:"unread"},
   {id:"unread_0612",time:"06:12",image:"naoki_0612",speaker:"",text:"NAOKI_0815_0612.jpg\n\n自動撮影カメラ。\n\n道路を歩く直樹。\n\n負傷している。\n\nしかし生きている。\n\n【悠真】\n「……直樹？」\n\n「生きてた？」",nextScene:"final_gate",unlockEvidence:["naoki_0612_photo"],setFlags:["naoki_0612_unlocked"],effect:"unread"},
@@ -113,7 +113,7 @@ const speakerSequences: Record<string, string[]> = {
   true_bbq:["美咲","直樹","美咲","直樹","美咲"], true_light:["直樹","悠真","直樹","美咲","直樹"], true_crime:["直樹","悠真","直樹"],
   true_detected:["直樹","久世","直樹","久世","久世"], true_wound:["悠真","直樹","悠真"], true_review:["直樹","悠真","直樹","直樹","小宮","藤堂","美咲"],
   true_outside:["小宮","森川","直樹","悠真","直樹"], true_leave:["直樹","悠真","直樹","悠真","直樹","悠真","直樹","悠真"], true_road:["悠真","直樹","悠真","直樹","悠真"],
-  true_bridge:["直樹","悠真","直樹","悠真","悠真","直樹","仲間の声","悠真","仲間"], true_present:Array(8).fill("悠真"), true_terminated:Array(8).fill("悠真"),
+  true_bridge:["直樹","悠真","直樹","悠真","悠真"], true_present:Array(12).fill("悠真"), true_terminated:Array(8).fill("悠真"),
   final_truth:["直樹","直樹","久世","久世","直樹","久世","直樹","直樹","久世","久世","直樹","直樹"], yuma_decision:Array(12).fill("悠真"),
   evidence_package:Array(6).fill("悠真"), end16:Array(7).fill("悠真")
 };
