@@ -1,0 +1,17 @@
+export const assetSlots: Record<string, { src: string; position?: string; crop?: string }> = {
+  lodge_arrival_1637: { src: "/assets/generated/lodge_arrival_1637.png", position: "center" },
+  lodge_day: { src: "/assets/reference/02_lodge_and_kuse_suv_reference.png", position: "25% 15%" },
+  lodge_night: { src: "/assets/reference/02_lodge_and_kuse_suv_reference.png", position: "70% 12%" },
+  room_d_day: { src: "/assets/reference/02_lodge_and_kuse_suv_reference.png", position: "72% 58%" },
+  room_d_night: { src: "/assets/reference/02_lodge_and_kuse_suv_reference.png", position: "91% 58%" },
+  suv: { src: "/assets/reference/02_lodge_and_kuse_suv_reference.png", position: "25% 91%" },
+  group_1718: { src: "/assets/generated/group_1718.png", position: "center" },
+  group_1718_hq: { src: "/assets/generated/group_1718.png", position: "center" },
+  group_1723: { src: "/assets/reference/03_group_photos_1718_1723_reference.png", position: "100% 0%", crop: "right" },
+  storyboard: { src: "/assets/reference/04_storyboard_60_images_reference.png", position: "50% 50%" },
+  crime_2231: { src: "/assets/generated/crime_2231.png", position: "center" },
+  true_route: { src: "/assets/reference/04_storyboard_60_images_reference.png", position: "50% 78%" },
+  bridge: { src: "/assets/generated/bridge_collapse.png", position: "center" },
+  naoki_0612: { src: "/assets/generated/naoki_0815_0612.png", position: "center" },
+  true_end: { src: "/assets/generated/true_end_group_1723.png", position: "center" },
+};
