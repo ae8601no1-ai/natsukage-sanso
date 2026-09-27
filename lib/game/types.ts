@@ -4,6 +4,7 @@ export type GameFlags = Record<string, boolean>;
 
 export type GameState = {
   currentScene: string;
+  readScenes: string[];
   endings: string[];
   endingCount: number;
   evidence: string[];

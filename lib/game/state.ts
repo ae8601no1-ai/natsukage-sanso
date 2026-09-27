@@ -4,6 +4,7 @@ export const STORAGE_KEY = "natsukage-sanso-save-v1";
 
 export const initialState: GameState = {
   currentScene: "arrival",
+  readScenes: [],
   endings: [], endingCount: 0, evidence: [], flags: {}, loopCount: 0,
   investigationUnlocked: false, sevenConfirmed: false,
   seventhPhotographerConfirmed: false, naokiIdentified: false,
