@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Archive, BookOpen, ChevronRight, Eye, FileSearch, Maximize2, RotateCcw, Settings, X } from "lucide-react";
+import { Archive, BookOpen, ChevronRight, Eye, FileSearch, KeyRound, Maximize2, RotateCcw, Settings, Users, X } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { assetSlots } from "@/lib/game/assets";
+import { visibleCharacterProfiles } from "@/lib/game/characters";
 import { validateFinal, validateFinalFields, validateInvestigation, validateInvestigationFields } from "@/lib/game/answers";
 import { evidence as allEvidence } from "@/lib/game/evidence";
 import { endingTitles, sceneMap } from "@/lib/game/scenes";
@@ -21,7 +22,10 @@ function SceneImage({ slot, onZoom }: { slot?: string; onZoom?: () => void }) {
 export default function Home() {
   const [state, setState] = useState<GameState>(initialState);
   const [ready, setReady] = useState(false);
-  const [screen, setScreen] = useState<"title" | "game" | "investigation" | "final">("title");
+  const [screen, setScreen] = useState<"title" | "characters" | "game" | "investigation" | "final">("title");
+  const [accessGranted, setAccessGranted] = useState(false);
+  const [accessCode, setAccessCode] = useState("");
+  const [accessError, setAccessError] = useState("");
   const [panel, setPanel] = useState<Panel>(null);
   const [zoomSlot, setZoomSlot] = useState<string | null>(null);
   const [investigation, setInvestigation] = useState(["", "", ""]);
@@ -31,7 +35,7 @@ export default function Home() {
   const [error, setError] = useState("");
   const [compare, setCompare] = useState<string[]>([]);
 
-  useEffect(() => { setState(loadState()); setReady(true); }, []);
+  useEffect(() => { setState(loadState()); setAccessGranted(localStorage.getItem("natsukage-access-granted") === "true"); setReady(true); }, []);
   useEffect(() => { if (ready) saveState(state); }, [ready, state]);
   const scene = sceneMap[state.currentScene] ?? sceneMap.arrival;
   const hasSceneImage = Boolean(scene.image && assetSlots[scene.image] && !assetSlots[scene.image].src.includes("/reference/"));
@@ -76,9 +80,11 @@ export default function Home() {
     const next = sceneMap.final_truth; setError(""); setFinalFeedback(null); setState(applyScene({ ...state, currentScene: next.id, naokiSurvivalConfirmed: true, kuseIdentified: true }, next)); setScreen("game");
   }
   if (!ready) return <main className="loading">記録を読み込んでいます…</main>;
+  if (!accessGranted) return <main className="app-shell access-shell"><AccessGate value={accessCode} setValue={setAccessCode} error={accessError} onSubmit={() => { if (accessCode.trim() !== "natukaze-0814") { setAccessError("認証コードが一致しません。"); return; } localStorage.setItem("natsukage-access-granted", "true"); setAccessError(""); setAccessGranted(true); setScreen("characters"); }} /><footer className="fiction-notice">このゲームはフィクションです。個人名。地名は実際には存在しません。</footer></main>;
 
   return <main className={`app-shell text-${state.settings.textSize} ${state.settings.reduceMotion ? "reduce-motion" : ""}`}><div className="grain" aria-hidden="true" />
-    {screen === "title" ? <section className={`title-screen ${state.trueEndCompleted ? "true-complete" : ""}`}><div className="title-atmosphere" /><div className="title-copy"><p className="eyebrow">AUGUST 14</p><h1>夏影山荘</h1><p className="title-sub">{state.trueEndCompleted ? "七人目の夏" : state.investigationUnlocked ? "DATA INCONSISTENCY DETECTED" : ""}</p><div className="title-actions"><button className="primary" onClick={startLoop}>{state.loopCount ? "はじめから" : "記録を開始"}<ChevronRight /></button>{state.loopCount > 0 && <button onClick={continueGame}>つづきから</button>}{state.endings.length > 0 && <button onClick={() => setPanel("archive")}>ARCHIVE</button>}{state.endings.length > 0 && <button onClick={() => setPanel("endings")}>ENDINGS</button>}{state.investigationUnlocked && !state.trueRouteUnlocked && <button className="signal" onClick={() => setScreen("investigation")}><FileSearch /> INVESTIGATION</button>}{state.trueRouteUnlocked && !state.trueEndCompleted && <button className="signal" onClick={startTrueRoute}><Eye /> TRUE ROUTE</button>}<button onClick={() => setPanel("settings")}>SETTINGS</button></div><p className="progress-line">LOOP {String(state.loopCount).padStart(2, "0")} / END {state.endings.filter((e) => e !== "END16").length} / {state.endings.includes("END15") ? "16" : "15"}</p></div></section>
+    {screen === "title" ? <section className={`title-screen ${state.trueEndCompleted ? "true-complete" : ""}`}><div className="title-atmosphere" /><div className="title-copy"><p className="eyebrow">AUGUST 14</p><h1>夏影山荘</h1><p className="title-sub">{state.trueEndCompleted ? "七人目の夏" : state.investigationUnlocked ? "DATA INCONSISTENCY DETECTED" : ""}</p><div className="title-actions"><button className="primary" onClick={startLoop}>{state.loopCount ? "はじめから" : "記録を開始"}<ChevronRight /></button>{state.loopCount > 0 && <button onClick={continueGame}>つづきから</button>}<button onClick={() => setScreen("characters")}><Users /> 人物紹介</button>{state.endings.length > 0 && <button onClick={() => setPanel("archive")}>ARCHIVE</button>}{state.endings.length > 0 && <button onClick={() => setPanel("endings")}>ENDINGS</button>}{state.investigationUnlocked && !state.trueRouteUnlocked && <button className="signal" onClick={() => setScreen("investigation")}><FileSearch /> INVESTIGATION</button>}{state.trueRouteUnlocked && !state.trueEndCompleted && <button className="signal" onClick={startTrueRoute}><Eye /> TRUE ROUTE</button>}<button onClick={() => setPanel("settings")}>SETTINGS</button></div><p className="progress-line">LOOP {String(state.loopCount).padStart(2, "0")} / END {state.endings.filter((e) => e !== "END16").length} / {state.endings.includes("END15") ? "16" : "15"}</p></div></section>
+    : screen === "characters" ? <CharacterIntroduction end15Unlocked={state.endings.includes("END15")} onClose={() => setScreen("title")} />
     : screen === "investigation" ? <Investigation values={investigation} setValues={(values) => { setInvestigation(values); setInvestigationFeedback(null); setError(""); }} feedback={investigationFeedback} error={error} onSubmit={submitInvestigation} onClose={() => setScreen("title")} />
     : screen === "final" ? <FinalInvestigation values={finalAnswers} setValues={(values) => { setFinalAnswers(values); setFinalFeedback(null); setError(""); }} feedback={finalFeedback} error={error} onSubmit={submitFinal} onClose={() => setScreen("game")} />
     : <section className={`game-screen ${scene.effect ?? ""}`}><header className="topbar"><button className="wordmark" onClick={() => setScreen("title")}>夏影山荘</button><nav aria-label="メインメニュー"><button onClick={() => setPanel("log")}><BookOpen /><span>LOG</span></button><button onClick={() => setPanel("archive")}><Archive /><span>ARCHIVE</span>{unlocked.length > 0 && <b>{unlocked.length}</b>}</button><button onClick={() => setPanel("endings")}><span>ENDINGS</span></button>{state.investigationUnlocked && <button onClick={() => setPanel("compare")}><span>COMPARE</span></button>}<button onClick={() => setPanel("settings")} aria-label="設定"><Settings /></button></nav></header><div className={`story-layout ${hasSceneImage ? "" : "no-visual"}`}>{hasSceneImage && <div className="scene-wrap"><SceneImage slot={scene.image} onZoom={() => setZoomSlot(scene.image ?? null)} /><span className="scene-id">{scene.id.toUpperCase()}</span></div>}<section className="narrative"><div className="scene-meta"><span>{scene.time}</span><span>LOOP {String(state.loopCount).padStart(2, "0")}</span></div><div className="dialogue"><p className="speaker">{scene.speaker}</p><p>{scene.text}</p></div>{scene.ending ? <div className="ending-actions"><p className="ending-label">{scene.ending === "END16" ? "TRUE END" : scene.ending}<strong>{endingTitles[scene.ending]}</strong></p><button className="primary" onClick={() => setScreen("title")}>TITLE</button></div> : state.currentScene === "final_gate" ? <button className="primary advance" onClick={() => setScreen("final")}>未確認ファイルを見る <ChevronRight /></button> : choices.length ? <div className="choices">{choices.map((choice) => <button key={choice.label} onClick={() => enterScene(choice.nextScene, choice)}><span>{choice.label}</span><ChevronRight /></button>)}</div> : scene.nextScene ? <><div className="advance-row">{canSkipRead && <button className="read-skip" onClick={() => skipReadScenes(false)}>既読SKIP</button>}{canSkipRead && <button className="read-skip" onClick={() => skipReadScenes(true)}>選択肢まで</button>}</div><button className="advance" onClick={() => enterScene(scene.nextScene!)}>次へ <ChevronRight /></button></> : null}</section></div></section>}
@@ -86,6 +92,15 @@ export default function Home() {
     <Dialog open={Boolean(zoomSlot)} onOpenChange={(open) => !open && setZoomSlot(null)}><DialogContent className="image-dialog"><DialogHeader><DialogTitle>画像資料</DialogTitle><DialogDescription>拡大表示。資料の細部を確認できます。</DialogDescription></DialogHeader>{zoomSlot && <SceneImage slot={zoomSlot} />}</DialogContent></Dialog>
     <footer className="fiction-notice">このゲームはフィクションです。個人名。地名は実際には存在しません。</footer>
   </main>;
+}
+
+function AccessGate({ value, setValue, error, onSubmit }: { value: string; setValue: (value: string) => void; error: string; onSubmit: () => void }) {
+  return <section className="access-screen"><div className="access-atmosphere" /><form className="access-card" onSubmit={(event) => { event.preventDefault(); onSubmit(); }}><KeyRound /><p className="eyebrow">AUTHENTICATION / AUGUST 14</p><h1>8月14日を始めますか？</h1><p>記録を開くには、認証コードを入力してください。</p><label><span>認証コード</span><input type="password" value={value} onChange={(event) => setValue(event.target.value)} autoComplete="off" spellCheck={false} /></label>{error && <p className="form-error">{error}</p>}<button className="primary" type="submit">認証して進む <ChevronRight /></button></form></section>;
+}
+
+function CharacterIntroduction({ end15Unlocked, onClose }: { end15Unlocked: boolean; onClose: () => void }) {
+  const profiles = visibleCharacterProfiles(end15Unlocked);
+  return <section className="character-screen"><header><div><p className="eyebrow">CHARACTER FILE</p><h1>人物紹介</h1><p>8月14日、夏影山荘を訪れた人々。</p></div><button onClick={onClose}><X /> TITLE</button></header><div className="character-grid">{profiles.map((profile) => <article className={profile.unlockAfterEnd15 ? "character-secret" : ""} key={profile.id}><img src={profile.image} alt={profile.name} /><div><span>{profile.role}</span><h2>{profile.name}</h2><p>{profile.description}</p></div></article>)}</div><button className="primary character-close" onClick={onClose}>タイトルへ進む <ChevronRight /></button></section>;
 }
 
 function Investigation({ values, setValues, feedback, error, onSubmit, onClose }: { values: string[]; setValues: (v: string[]) => void; feedback: boolean[] | null; error: string; onSubmit: () => void; onClose: () => void }) {

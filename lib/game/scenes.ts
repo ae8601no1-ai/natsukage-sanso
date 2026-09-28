@@ -5,7 +5,8 @@ const end=(id:string,text:string,unlockEvidence:string[]=[],image?:string):Scene
 
 const baseScenes:Scene[]=[
   {id:"arrival",time:"AUGUST 14",speaker:"悠真・モノローグ",text:"大学最後の夏だった。\n\n佐久間が見つけてきた山奥の貸山荘で、\n\n一泊して、\n\nバーベキューをして、\n\nくだらない話をして。\n\nそれだけの旅行になるはずだった。",nextScene:"arrival_time"},
-  {id:"arrival_time",time:"16:37",speaker:"悠真・モノローグ",text:"――あの夜。\n\n肝試しなんかしなければ。\n\nたぶん、\n\n何も起きなかった。",nextScene:"arrival_friends"},
+  {id:"arrival_time",time:"16:37",speaker:"悠真・モノローグ",text:"――あの夜。\n\n肝試しなんかしなければ。\n\nたぶん、\n\n何も起きなかった。",nextScene:"opening_rumor"},
+  {id:"opening_rumor",time:"旅行前の記憶",image:"tunnel_shrine_2202",speaker:"悠真・モノローグ",text:"佐久間がこの山荘を見つけた時、近くに使われなくなった廃トンネルがあることも話題になった。\n\nその入口のそばには、古い祠が残されているらしい。\n\n『祠に触れた者は、山から帰れない』。\n\n森川が見つけてきたのは、そんな書き込みだった。\n\nあいつは肝試しに行こうと笑い、俺たちも、その時はただの作り話だと思っていた。",nextScene:"arrival_friends"},
   {id:"arrival_friends",time:"16:37",image:"lodge_arrival_1637",speaker:"佐久間／森川／美咲／小宮／藤堂",text:"「着いたー！」\n\n「遠すぎだろ。コンビニから何分走った？」\n\n「でも、いいじゃん。写真で見たより全然いい」\n\n「虫すごいけどね」\n\n「山に来て虫に文句言うなよ」\n\n「森川には言われたくない」\n\n「荷物、先に入れよう」",nextScene:"arrival_kuse"},
   {id:"arrival_kuse",time:"16:40",image:"lodge_arrival_1637",speaker:"久世 隆一",text:"「高瀬さんたちですね？」\n\n「管理人の久世です」\n\n「今日は皆さんだけですから、ゆっくりしてください」\n\n「一階がリビングとキッチン」\n\n「寝室は二階です」\n\n「何かあったら管理棟にいますから」",choices:[{label:"山荘について聞く",nextScene:"ask_lodge"},{label:"廃トンネルについて聞く",nextScene:"ask_tunnel",setFlags:["heard_tunnel_warning"]},{label:"特に聞かない",nextScene:"ask_nothing"}]},
   {id:"ask_lodge",time:"16:42",speaker:"悠真／久世",text:"「ここ、結構古いんですか？」\n\n「ええ。もうずいぶんになります」\n\n「昔はもっとお客さんも多かったんですけどね」\n\n「まあ、古いぶん不便なところもあります」\n\n「夜は足元に気をつけてください」",nextScene:"explore_intro"},
@@ -118,6 +119,49 @@ const speakerSequences: Record<string, string[]> = {
   evidence_package:Array(6).fill("悠真"), end16:Array(7).fill("悠真")
 };
 
+const narrationByScene: Record<string, string> = {
+  arrival_friends: "山道を車で走り続け、俺たち六人は夕方になってようやく夏影山荘へ着いた。大学の仲間だけで過ごす、一泊二日の旅行だった。",
+  arrival_kuse: "荷物を下ろしていると、玄関から管理人の久世隆一が出てきた。今日この山荘を利用する客は、俺たちだけだという。",
+  ask_lodge: "古い建物だと聞いていた俺は、夜を迎える前に山荘について確かめておくことにした。",
+  ask_tunnel: "旅行前に聞いた廃トンネルと祠の噂が気になり、俺は久世さんに場所を尋ねた。",
+  ask_nothing: "その時の俺は、管理人の注意を深く考えなかった。まずは荷物を片づけることにした。",
+  explore_intro: "BBQを始めるまで少し時間があった。俺たちは山荘の間取りと、自分たちが使う場所を確認することにした。",
+  explore_living: "一階のリビングには大きな木製テーブルがあり、夕方の光が差し込んでいた。",
+  explore_kitchen: "キッチンには、途中のコンビニで買った食料と飲み物が積まれていた。",
+  explore_roomd: "二階には寝室が四つ並んでいた。俺たちが使うのはAからCまでで、寝室Dは空室だと聞いていた。",
+  explore_parking: "駐車場には俺たちが乗ってきた車と、少し離れて濃紺の古いSUVが停まっていた。",
+  explore_bags: "玄関脇の荷物置場には、六人が持ってきたバッグが並んでいた。その中に一つだけ、見覚えのない黒いカメラバッグがあった。",
+  photo_setup: "山荘の前で、旅行の記念写真を撮ることになった。俺たち六人は横一列に並んだ。",
+  photo_question: "保存された写真には、旅行に来た六人全員が写っていた。俺はそのことを不思議に思わなかった。",
+  bbq: "日が傾いた頃、俺たちは山荘前でBBQを始めた。これが大学最後の夏の思い出になるはずだった。",
+  test_proposal: "BBQが終わった夜、森川が旅行前から話していた廃トンネルへの肝試しを持ち出した。目的地は、あの祠がある場所だった。",
+  night_road: "午後九時半を過ぎ、俺たちは懐中電灯を手に山荘を出た。廃トンネルまでは街灯のない山道を歩かなければならない。",
+  tunnel: "山道の先に、封鎖された古いトンネルが現れた。その脇の木々に隠れるように、小さな石の祠が残っていた。",
+  shrine: "噂の祠を見つけた森川は、止める間もなく近づいていった。",
+  shrine_touch: "森川は祠に手を触れた。何も起きなかったことに安心し、俺たちは山荘へ引き返した。",
+  lodge_knock: "山荘へ戻ると停電が起きた。暗闇の中、玄関の扉を外から叩く音が三度響いた。",
+  seven_steps: "玄関を開けず、俺たちは暗い廊下を奥へ移動した。すると、自分たちの足音に別の一歩が重なって聞こえた。",
+  roomd_night: "俺たちは二階へ逃げ、使っていないはずの寝室Dの前で人数を確かめた。ここにいるのは六人だけだった。",
+  wound_appears: "祠から離れようとした時、美咲が俺の右腕を見て声を上げた。そこには、いつ負ったのか分からない傷があった。",
+  escape_car: "これ以上ここにいるのは危険だと考え、俺たちは車で山を下りようと駐車場へ急いだ。",
+  forest_light: "廃トンネルから戻る途中、俺は林の奥で動く光に気づいた。誰かがいるように見えた。",
+  crime_photo: "美咲のカメラを向けると、暗い林道で倒れている人と、その横に立つ男が写った。",
+  kuse_notice: "俺たちが近づいた瞬間、倒れた人物のそばにいた男がこちらを振り返った。",
+  invasion: "写真を持ったまま山荘へ戻ったが、外には俺たちを追ってきた気配があった。狙われているのは写真だと思った。",
+  chase: "山荘を飛び出して逃げると、知らない送信者から写真を返すようメッセージが届いた。",
+  murder_stay: "俺たちは肝試しへ行かず、山荘に残ることにした。だが、それで何事もなく朝を迎えられるわけではなかった。",
+  body_found: "夜が深まり、姿の見えなくなった佐久間を探して二階へ上がった。そこで倒れている佐久間を見つけた。",
+  murder_investigation: "外部から誰かが入った形跡はない。俺たちは山荘内に残された物と、それぞれの行動を調べ始めた。",
+  message_2351: "佐久間のスマートフォンを調べると、倒れている本人の名前で新しいメッセージが届いた。",
+  unknown_room: "空室のはずの寝室Dには、誰かが滞在していたとしか思えない痕跡が残っていた。",
+  photographer_question: "17時18分の集合写真をもう一度確認した。そこには、旅行に来たと記憶している六人全員が写っていた。",
+};
+
+function addNarration(scene: Scene): Scene {
+  const narration = narrationByScene[scene.id];
+  return narration ? { ...scene, text: `${narration}\n\n${scene.text}` } : scene;
+}
+
 function addNamesToDialogue(scene: Scene): Scene {
   if (!scene.speaker || scene.speaker === "システム") return scene;
 
@@ -138,5 +182,5 @@ function addNamesToDialogue(scene: Scene): Scene {
   return { ...scene, speaker: "", text };
 }
 
-export const scenes = baseScenes.map(addNamesToDialogue);
+export const scenes = baseScenes.map(addNarration).map(addNamesToDialogue);
 export const sceneMap=Object.fromEntries(scenes.map(scene=>[scene.id,scene]));

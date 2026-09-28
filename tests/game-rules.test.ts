@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { validateFinal, validateFinalFields, validateInvestigation, validateInvestigationFields } from "../lib/game/answers.ts";
 import { endingTitles, sceneMap, scenes } from "../lib/game/scenes.ts";
 import { canUnlockEnd15, initialState, meets } from "../lib/game/state.ts";
+import { visibleCharacterProfiles } from "../lib/game/characters.ts";
 
 test("END15 requires eight distinct endings and every required ending", () => {
   assert.equal(canUnlockEnd15({ ...initialState, endings: ["END03", "END10", "END13", "END14", "END01", "END02", "END04"] }), false);
@@ -78,4 +79,24 @@ test("the bridge scene contains only Yuma and Naoki and explains Yuma leaving al
   assert.equal(sceneMap.true_bridge.text.includes("車"), false);
   assert.equal(sceneMap.true_present.text.includes("周りには誰もいなかった"), true);
   assert.equal(sceneMap.true_present.text.includes("一人で橋を離れた"), true);
+});
+
+test("the opening introduces the tunnel shrine before arrival dialogue", () => {
+  assert.equal(sceneMap.arrival_time.nextScene, "opening_rumor");
+  assert.equal(sceneMap.opening_rumor.nextScene, "arrival_friends");
+  assert.equal(sceneMap.opening_rumor.text.includes("廃トンネル"), true);
+  assert.equal(sceneMap.opening_rumor.text.includes("祠"), true);
+  assert.equal(sceneMap.opening_rumor.text.includes("山から帰れない"), true);
+});
+
+test("Naoki is hidden from character introductions until END15", () => {
+  assert.equal(visibleCharacterProfiles(false).some((profile) => profile.name === "相沢 直樹"), false);
+  assert.equal(visibleCharacterProfiles(true).some((profile) => profile.name === "相沢 直樹"), true);
+});
+
+test("all scene transitions reference existing scenes", () => {
+  for (const scene of scenes) {
+    if (scene.nextScene) assert.ok(sceneMap[scene.nextScene], `${scene.id} -> ${scene.nextScene}`);
+    for (const choice of scene.choices ?? []) assert.ok(sceneMap[choice.nextScene], `${scene.id} -> ${choice.nextScene}`);
+  }
 });

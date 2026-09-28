@@ -1,12 +1,12 @@
 # NATSUKAGE IMPLEMENTATION REVIEW
 
-生成日時: 2026-09-27T14:30:37.053Z
+生成日時: 2026-09-28T13:45:46.436Z
 
 > この文書は現在のソースコードから生成した実装監査資料です。仕様書上の予定ではなく、`lib/game/scenes.ts`、`state.ts`、`answers.ts`、`evidence.ts`、`assets.ts`、`app/page.tsx` の現実装を正としています。秘密情報、Cookie、環境変数の実値は含みません。
 
 ## 1. 全シーン一覧
 
-実装scene数: **87**。画面タイトル専用フィールドはScene型に存在しません。通常ゲーム画面の固定ヘッダーは「夏影山荘」、画面内識別表示はscene IDです。
+実装scene数: **88**。画面タイトル専用フィールドはScene型に存在しません。通常ゲーム画面の固定ヘッダーは「夏影山荘」、画面内識別表示はscene IDです。
 
 ### arrival
 
@@ -50,7 +50,7 @@
 - 表示条件: なし
 - セットされるflag: なし
 - 必要flag: なし
-- 次scene: `arrival_friends`
+- 次scene: `opening_rumor`
 - ending: なし
 - 解放証拠: なし
 - 本文（実表示全文）:
@@ -63,6 +63,36 @@
 たぶん、
 
 何も起きなかった。
+```
+
+- 会話抽出: なし
+- 選択肢: なし
+
+### opening_rumor
+
+- scene ID: `opening_rumor`
+- 画面タイトル: 夏影山荘 / OPENING_RUMOR
+- 表示時刻: `旅行前の記憶`
+- 使用画像slot: `tunnel_shrine_2202`
+- 使用画像ファイル名: `tunnel_shrine_2202.png`
+- 表示条件: なし
+- セットされるflag: なし
+- 必要flag: なし
+- 次scene: `arrival_friends`
+- ending: なし
+- 解放証拠: なし
+- 本文（実表示全文）:
+
+```text
+佐久間がこの山荘を見つけた時、近くに使われなくなった廃トンネルがあることも話題になった。
+
+その入口のそばには、古い祠が残されているらしい。
+
+『祠に触れた者は、山から帰れない』。
+
+森川が見つけてきたのは、そんな書き込みだった。
+
+あいつは肝試しに行こうと笑い、俺たちも、その時はただの作り話だと思っていた。
 ```
 
 - 会話抽出: なし
@@ -84,6 +114,8 @@
 - 本文（実表示全文）:
 
 ```text
+山道を車で走り続け、俺たち六人は夕方になってようやく夏影山荘へ着いた。大学の仲間だけで過ごす、一泊二日の旅行だった。
+
 【佐久間】
 「着いたー！」
 
@@ -148,6 +180,8 @@
 - 本文（実表示全文）:
 
 ```text
+荷物を下ろしていると、玄関から管理人の久世隆一が出てきた。今日この山荘を利用する客は、俺たちだけだという。
+
 【久世】
 「高瀬さんたちですね？」
 
@@ -210,6 +244,8 @@
 - 本文（実表示全文）:
 
 ```text
+古い建物だと聞いていた俺は、夜を迎える前に山荘について確かめておくことにした。
+
 【悠真】
 「ここ、結構古いんですか？」
 
@@ -262,6 +298,8 @@
 - 本文（実表示全文）:
 
 ```text
+旅行前に聞いた廃トンネルと祠の噂が気になり、俺は久世さんに場所を尋ねた。
+
 【悠真】
 「この近くに古いトンネルがあるって聞いたんですけど」
 
@@ -332,6 +370,8 @@
 - 本文（実表示全文）:
 
 ```text
+その時の俺は、管理人の注意を深く考えなかった。まずは荷物を片づけることにした。
+
 【悠真】
 「分かりました」
 
@@ -366,6 +406,8 @@
 - 本文（実表示全文）:
 
 ```text
+BBQを始めるまで少し時間があった。俺たちは山荘の間取りと、自分たちが使う場所を確認することにした。
+
 【佐久間】
 「BBQまでまだ時間あるな」
 
@@ -406,6 +448,8 @@
 - 本文（実表示全文）:
 
 ```text
+一階のリビングには大きな木製テーブルがあり、夕方の光が差し込んでいた。
+
 【悠真】
 「結構広いな」
 
@@ -446,6 +490,8 @@
 - 本文（実表示全文）:
 
 ```text
+キッチンには、途中のコンビニで買った食料と飲み物が積まれていた。
+
 【悠真】
 「買いすぎじゃないか？」
 
@@ -492,6 +538,8 @@
 - 本文（実表示全文）:
 
 ```text
+二階には寝室が四つ並んでいた。俺たちが使うのはAからCまでで、寝室Dは空室だと聞いていた。
+
 【悠真】
 「Dは誰も使わないんだっけ」
 
@@ -556,6 +604,8 @@
 - 本文（実表示全文）:
 
 ```text
+駐車場には俺たちが乗ってきた車と、少し離れて濃紺の古いSUVが停まっていた。
+
 【佐久間】
 「あれ、管理人さんのかな」
 
@@ -596,6 +646,8 @@
 - 本文（実表示全文）:
 
 ```text
+玄関脇の荷物置場には、六人が持ってきたバッグが並んでいた。その中に一つだけ、見覚えのない黒いカメラバッグがあった。
+
 【悠真】
 「……これ誰のだ？」
 
@@ -636,6 +688,8 @@
 - 本文（実表示全文）:
 
 ```text
+山荘の前で、旅行の記念写真を撮ることになった。俺たち六人は横一列に並んだ。
+
 【美咲】
 「せっかくだから写真撮ろうよ」
 
@@ -670,6 +724,8 @@
 - 本文（実表示全文）:
 
 ```text
+保存された写真には、旅行に来た六人全員が写っていた。俺はそのことを不思議に思わなかった。
+
 高瀬悠真
 佐久間亮
 森川拓海
@@ -775,6 +831,8 @@
 - 本文（実表示全文）:
 
 ```text
+日が傾いた頃、俺たちは山荘前でBBQを始めた。これが大学最後の夏の思い出になるはずだった。
+
 【佐久間】
 「乾杯！」
 
@@ -864,6 +922,8 @@
 - 本文（実表示全文）:
 
 ```text
+BBQが終わった夜、森川が旅行前から話していた廃トンネルへの肝試しを持ち出した。目的地は、あの祠がある場所だった。
+
 【森川】
 「ということで」
 
@@ -950,6 +1010,8 @@
 - 本文（実表示全文）:
 
 ```text
+午後九時半を過ぎ、俺たちは懐中電灯を手に山荘を出た。廃トンネルまでは街灯のない山道を歩かなければならない。
+
 【小宮】
 「ほんとに行くの？」
 
@@ -1028,6 +1090,8 @@
 - 本文（実表示全文）:
 
 ```text
+山道の先に、封鎖された古いトンネルが現れた。その脇の木々に隠れるように、小さな石の祠が残っていた。
+
 【森川】
 「……あった」
 
@@ -1072,6 +1136,8 @@
 - 本文（実表示全文）:
 
 ```text
+噂の祠を見つけた森川は、止める間もなく近づいていった。
+
 【小宮】
 「森川、やめなよ」
 
@@ -1110,6 +1176,8 @@
 - 本文（実表示全文）:
 
 ```text
+森川は祠に手を触れた。何も起きなかったことに安心し、俺たちは山荘へ引き返した。
+
 【悠真】
 「……。」
 
@@ -1162,6 +1230,8 @@
 - 本文（実表示全文）:
 
 ```text
+山荘へ戻ると停電が起きた。暗闇の中、玄関の扉を外から叩く音が三度響いた。
+
 【美咲】
 「停電？」
 
@@ -1224,6 +1294,8 @@
 - 本文（実表示全文）:
 
 ```text
+玄関を開けず、俺たちは暗い廊下を奥へ移動した。すると、自分たちの足音に別の一歩が重なって聞こえた。
+
 【美咲】
 「……ねえ」
 
@@ -1282,6 +1354,8 @@
 - 本文（実表示全文）:
 
 ```text
+俺たちは二階へ逃げ、使っていないはずの寝室Dの前で人数を確かめた。ここにいるのは六人だけだった。
+
 【悠真】
 「ちょっと待って」
 
@@ -1332,6 +1406,8 @@
 - 本文（実表示全文）:
 
 ```text
+祠から離れようとした時、美咲が俺の右腕を見て声を上げた。そこには、いつ負ったのか分からない傷があった。
+
 【悠真】
 「やめとけ」
 
@@ -1417,6 +1493,8 @@
 - 本文（実表示全文）:
 
 ```text
+これ以上ここにいるのは危険だと考え、俺たちは車で山を下りようと駐車場へ急いだ。
+
 駐車場へ戻る。
 
 佐久間が運転席に乗り込み、キーを回す。
@@ -1468,6 +1546,8 @@
 - 本文（実表示全文）:
 
 ```text
+廃トンネルから戻る途中、俺は林の奥で動く光に気づいた。誰かがいるように見えた。
+
 【悠真】
 「あれ……」
 
@@ -1512,6 +1592,8 @@
 - 本文（実表示全文）:
 
 ```text
+美咲のカメラを向けると、暗い林道で倒れている人と、その横に立つ男が写った。
+
 【美咲】
 「……これ」
 
@@ -1556,6 +1638,8 @@
 - 本文（実表示全文）:
 
 ```text
+俺たちが近づいた瞬間、倒れた人物のそばにいた男がこちらを振り返った。
+
 【男】
 「……！」
 
@@ -1602,6 +1686,8 @@
 - 本文（実表示全文）:
 
 ```text
+写真を持ったまま山荘へ戻ったが、外には俺たちを追ってきた気配があった。狙われているのは写真だと思った。
+
 【小宮】
 「写真消して！」
 
@@ -1646,6 +1732,8 @@
 - 本文（実表示全文）:
 
 ```text
+山荘を飛び出して逃げると、知らない送信者から写真を返すようメッセージが届いた。
+
 写真を返してくれ
 
 誰も傷つけるつもりはない
@@ -1716,6 +1804,8 @@
 - 本文（実表示全文）:
 
 ```text
+俺たちは肝試しへ行かず、山荘に残ることにした。だが、それで何事もなく朝を迎えられるわけではなかった。
+
 【悠真】
 「俺はやめとく」
 
@@ -1762,6 +1852,8 @@
 - 本文（実表示全文）:
 
 ```text
+夜が深まり、姿の見えなくなった佐久間を探して二階へ上がった。そこで倒れている佐久間を見つけた。
+
 【美咲】
 「佐久間、どこ行った？」
 
@@ -1838,6 +1930,8 @@
 - 本文（実表示全文）:
 
 ```text
+外部から誰かが入った形跡はない。俺たちは山荘内に残された物と、それぞれの行動を調べ始めた。
+
 3か所調査してください。
 ```
 
@@ -1865,6 +1959,8 @@
 - 本文（実表示全文）:
 
 ```text
+佐久間のスマートフォンを調べると、倒れている本人の名前で新しいメッセージが届いた。
+
 お前ら、まだ外？
 
 【悠真】
@@ -1921,6 +2017,8 @@
 - 本文（実表示全文）:
 
 ```text
+空室のはずの寝室Dには、誰かが滞在していたとしか思えない痕跡が残っていた。
+
 【悠真】
 「これ……」
 
@@ -1969,6 +2067,8 @@ A—— N——
 - 本文（実表示全文）:
 
 ```text
+17時18分の集合写真をもう一度確認した。そこには、旅行に来たと記憶している六人全員が写っていた。
+
 【美咲】
 「……悠真」
 
@@ -5017,7 +5117,7 @@ FINAL RECORD RESTORED
 
 ## 4. 全画像アセット一覧
 
-実ファイル数: **25**
+実ファイル数: **33**
 
 ### bbq_1805.png
 
@@ -5034,6 +5134,70 @@ FINAL RECORD RESTORED
 - asset slot: `bridge`
 - 使用scene: `true_bridge`
 - 用途: scene:true_bridge
+
+### character_aizawa_naoki.png
+
+- ファイル名: `character_aizawa_naoki.png`
+- パス: `public/assets/generated/character_aizawa_naoki.png`
+- asset slot: なし
+- 使用scene: なし
+- 用途: 未使用
+
+### character_komiya_ayaka.png
+
+- ファイル名: `character_komiya_ayaka.png`
+- パス: `public/assets/generated/character_komiya_ayaka.png`
+- asset slot: なし
+- 使用scene: なし
+- 用途: 未使用
+
+### character_kuze_ryuichi.png
+
+- ファイル名: `character_kuze_ryuichi.png`
+- パス: `public/assets/generated/character_kuze_ryuichi.png`
+- asset slot: なし
+- 使用scene: なし
+- 用途: 未使用
+
+### character_mizuno_misaki.png
+
+- ファイル名: `character_mizuno_misaki.png`
+- パス: `public/assets/generated/character_mizuno_misaki.png`
+- asset slot: なし
+- 使用scene: なし
+- 用途: 未使用
+
+### character_morikawa_takumi.png
+
+- ファイル名: `character_morikawa_takumi.png`
+- パス: `public/assets/generated/character_morikawa_takumi.png`
+- asset slot: なし
+- 使用scene: なし
+- 用途: 未使用
+
+### character_sakuma_ryo.png
+
+- ファイル名: `character_sakuma_ryo.png`
+- パス: `public/assets/generated/character_sakuma_ryo.png`
+- asset slot: なし
+- 使用scene: なし
+- 用途: 未使用
+
+### character_takase_yuma.png
+
+- ファイル名: `character_takase_yuma.png`
+- パス: `public/assets/generated/character_takase_yuma.png`
+- asset slot: なし
+- 使用scene: なし
+- 用途: 未使用
+
+### character_todo_keisuke.png
+
+- ファイル名: `character_todo_keisuke.png`
+- パス: `public/assets/generated/character_todo_keisuke.png`
+- asset slot: なし
+- 使用scene: なし
+- 用途: 未使用
 
 ### crime_2231.png
 
@@ -5168,8 +5332,8 @@ FINAL RECORD RESTORED
 - ファイル名: `tunnel_shrine_2202.png`
 - パス: `public/assets/generated/tunnel_shrine_2202.png`
 - asset slot: `tunnel_shrine_2202`
-- 使用scene: `night_road`、`tunnel`、`shrine`、`shrine_touch`、`true_light`
-- 用途: scene:night_road / scene:tunnel / scene:shrine / scene:shrine_touch / scene:true_light
+- 使用scene: `opening_rumor`、`night_road`、`tunnel`、`shrine`、`shrine_touch`、`true_light`
+- 用途: scene:opening_rumor / scene:night_road / scene:tunnel / scene:shrine / scene:shrine_touch / scene:true_light
 
 ### unknown_camera_bag.png
 
@@ -5221,6 +5385,7 @@ FINAL RECORD RESTORED
 
 ## 5. sceneから参照されている画像一覧
 
+- `opening_rumor` / 指定slot: `tunnel_shrine_2202` / 実ファイル: `public/assets/generated/tunnel_shrine_2202.png` / 存在: **YES**
 - `arrival_friends` / 指定slot: `lodge_arrival_1637` / 実ファイル: `public/assets/generated/lodge_arrival_1637.png` / 存在: **YES**
 - `arrival_kuse` / 指定slot: `lodge_arrival_1637` / 実ファイル: `public/assets/generated/lodge_arrival_1637.png` / 存在: **YES**
 - `explore_living` / 指定slot: `living_seven_cups` / 実ファイル: `public/assets/generated/living_seven_cups.png` / 存在: **YES**
@@ -6113,249 +6278,251 @@ START →
     └─ 次へ →
      arrival_time
        └─ 次へ →
-        arrival_friends
+        opening_rumor
           └─ 次へ →
-           arrival_kuse
-             ├─ 山荘について聞く →
-           │  ask_lodge
-           │    └─ 次へ →
-           │     explore_intro
-           │       ├─ リビング →
-           │     │  explore_living
-           │     │    └─ 次へ →
-           │     │     photo_setup
-           │     │       └─ 次へ →
-           │     │        photo_question
-           │     │          ├─ 写真を見る →
-           │     │        │  photo_look
-           │     │        │    └─ 次へ →
-           │     │        │     bbq
-           │     │        │       └─ 次へ →
-           │     │        │        bbq_memory
-           │     │        │          ├─ 次へ →
-           │     │        │        │  test_proposal
-           │     │        │        │    ├─ 行く →
-           │     │        │        │  │  night_road
-           │     │        │        │  │    └─ 次へ →
-           │     │        │        │  │     night_monologue
-           │     │        │        │  │       └─ 次へ →
-           │     │        │        │  │        tunnel
-           │     │        │        │  │          ├─ 森川を追う →
-           │     │        │        │  │        │  shrine
-           │     │        │        │  │        │    ├─ 止める →
-           │     │        │        │  │        │  │  wound_appears
-           │     │        │        │  │        │  │    ├─ 傷を見る →
-           │     │        │        │  │        │  │  │  end03 (END03: 傷)
-           │     │        │        │  │        │  │  │    └─ TITLE → START（次周回）
-           │     │        │        │  │        │  │    └─ 気にしない →
-           │     │        │        │  │        │  │     escape_car
-           │     │        │        │  │        │  │       ├─ 徒歩で下山 →
-           │     │        │        │  │        │  │     │  end04 (END04: 帰れない)
-           │     │        │        │  │        │  │     │    └─ TITLE → START（次周回）
-           │     │        │        │  │        │  │       └─ 山荘へ戻る →
-           │     │        │        │  │        │  │        end05 (END05: 呪われた六人)
-           │     │        │        │  │        │  │          └─ TITLE → START（次周回）
-           │     │        │        │  │        │    ├─ 止めない →
-           │     │        │        │  │        │  │  shrine_touch
-           │     │        │        │  │        │  │    └─ 次へ →
-           │     │        │        │  │        │  │     lodge_knock
-           │     │        │        │  │        │  │       ├─ 玄関を開ける →
-           │     │        │        │  │        │  │     │  end01 (END01: 触れてはいけない)
-           │     │        │        │  │        │  │     │    └─ TITLE → START（次周回）
-           │     │        │        │  │        │  │       ├─ 開けない →
-           │     │        │        │  │        │  │     │  seven_steps
-           │     │        │        │  │        │  │     │    ├─ 人数を数える →
-           │     │        │        │  │        │  │     │  │  end02 (END02: 六人目の足音)
-           │     │        │        │  │        │  │     │  │    └─ TITLE → START（次周回）
-           │     │        │        │  │        │  │     │    ├─ 振り返る →
-           │     │        │        │  │        │  │     │  │  end05 (END05: 呪われた六人)
-           │     │        │        │  │        │  │     │  │    └─ [既出sceneへ合流]
-           │     │        │        │  │        │  │     │    └─ 外へ走る →
-           │     │        │        │  │        │  │     │     escape_car
-           │     │        │        │  │        │  │     │       └─ [既出sceneへ合流]
-           │     │        │        │  │        │  │       └─ 二階へ逃げる →
-           │     │        │        │  │        │  │        roomd_night
-           │     │        │        │  │        │  │          ├─ ベッドを見る →
-           │     │        │        │  │        │  │        │  end02 (END02: 六人目の足音)
-           │     │        │        │  │        │  │        │    └─ [既出sceneへ合流]
-           │     │        │        │  │        │  │          ├─ 充電ケーブルを見る →
-           │     │        │        │  │        │  │        │  end02 (END02: 六人目の足音)
-           │     │        │        │  │        │  │        │    └─ [既出sceneへ合流]
-           │     │        │        │  │        │  │          └─ 逃げる →
-           │     │        │        │  │        │  │           end05 (END05: 呪われた六人)
-           │     │        │        │  │        │  │             └─ [既出sceneへ合流]
-           │     │        │        │  │        │    └─ 祠を撮影する →
-           │     │        │        │  │        │     forest_light
-           │     │        │        │  │        │       ├─ 遠くから撮影する →
-           │     │        │        │  │        │     │  crime_photo
-           │     │        │        │  │        │     │    ├─ 拡大する →
-           │     │        │        │  │        │     │  │  end06 (END06: 見てはいけない写真)
-           │     │        │        │  │        │     │  │    └─ TITLE → START（次周回）
-           │     │        │        │  │        │     │    ├─ 削除する →
-           │     │        │        │  │        │     │  │  end07 (END07: 写真を消せ)
-           │     │        │        │  │        │     │  │    └─ TITLE → START（次周回）
-           │     │        │        │  │        │     │    └─ 山荘へ戻る →
-           │     │        │        │  │        │     │     invasion
-           │     │        │        │  │        │     │       ├─ スマホを隠す →
-           │     │        │        │  │        │     │     │  end08 (END08: 管理人)
-           │     │        │        │  │        │     │     │    └─ TITLE → START（次周回）
-           │     │        │        │  │        │     │       ├─ 写真を削除 →
-           │     │        │        │  │        │     │     │  end07 (END07: 写真を消せ)
-           │     │        │        │  │        │     │     │    └─ [既出sceneへ合流]
-           │     │        │        │  │        │     │       └─ 外へ逃げる →
-           │     │        │        │  │        │     │        chase
-           │     │        │        │  │        │     │          ├─ 返信する →
-           │     │        │        │  │        │     │        │  reply_unknown
-           │     │        │        │  │        │     │        │    └─ 次へ →
-           │     │        │        │  │        │     │        │     end09 (END09: 追跡者)
-           │     │        │        │  │        │     │        │       └─ TITLE → START（次周回）
-           │     │        │        │  │        │     │          ├─ スマホを捨てる →
-           │     │        │        │  │        │     │        │  end09 (END09: 追跡者)
-           │     │        │        │  │        │     │        │    └─ [既出sceneへ合流]
-           │     │        │        │  │        │     │          └─ 警察へ電話する →
-           │     │        │        │  │        │     │           end10 (END10: 全員生還)
-           │     │        │        │  │        │     │             └─ TITLE → START（次周回）
-           │     │        │        │  │        │       ├─ 近づく →
-           │     │        │        │  │        │     │  kuse_notice
-           │     │        │        │  │        │     │    └─ 次へ →
-           │     │        │        │  │        │     │     invasion
-           │     │        │        │  │        │     │       └─ [既出sceneへ合流]
-           │     │        │        │  │        │       └─ みんなに知らせる →
-           │     │        │        │  │        │        kuse_notice
-           │     │        │        │  │        │          └─ [既出sceneへ合流]
-           │     │        │        │  │          ├─ 林の光を見る →
-           │     │        │        │  │        │  forest_light
-           │     │        │        │  │        │    └─ [既出sceneへ合流]
-           │     │        │        │  │          └─ 山荘へ戻る →
-           │     │        │        │  │           escape_car
-           │     │        │        │  │             └─ [既出sceneへ合流]
-           │     │        │        │    ├─ 行かない →
-           │     │        │        │  │  murder_stay
-           │     │        │        │  │    └─ 次へ →
-           │     │        │        │  │     body_found
-           │     │        │        │  │       └─ 次へ →
-           │     │        │        │  │        murder_investigation
-           │     │        │        │  │          ├─ 藤堂が犯人だ →
-           │     │        │        │  │        │  end11 (END11: 犯人は藤堂)
-           │     │        │        │  │        │    └─ TITLE → START（次周回）
-           │     │        │        │  │          ├─ 佐久間のスマートフォン →
-           │     │        │        │  │        │  message_2351
-           │     │        │        │  │        │    └─ 次へ →
-           │     │        │        │  │        │     end12 (END12: 23時51分)
-           │     │        │        │  │        │       └─ TITLE → START（次周回）
-           │     │        │        │  │          ├─ 空室D →
-           │     │        │        │  │        │  unknown_room
-           │     │        │        │  │        │    └─ 次へ →
-           │     │        │        │  │        │     end13 (END13: 空室)
-           │     │        │        │  │        │       └─ TITLE → START（次周回）
-           │     │        │        │  │          └─ 集合写真再検証 [`END02` OR `END13` のいずれか取得済み] →
-           │     │        │        │  │           photographer_question
-           │     │        │        │  │             └─ 次へ →
-           │     │        │        │  │              end14 (END14: 撮影者)
-           │     │        │        │  │                └─ TITLE → START（次周回）
-           │     │        │        │    └─ まだ決めない [state.`loopCount` = true] →
-           │     │        │        │     night_road
-           │     │        │        │       └─ [既出sceneへ合流]
-           │     │        │          └─ 誰もいない席を見る [canUnlockEnd15(state) = true] →
-           │     │        │           empty_seat
-           │     │        │             └─ 次へ →
-           │     │        │              unknown_phone
-           │     │        │                └─ 次へ →
-           │     │        │                 end15 (END15: 存在しない人)
-           │     │        │                   └─ TITLE→INVESTIGATION正答 →
-           │     │        │                    investigation_restored
-           │     │        │                      └─ 次へ →
-           │     │        │                       true_arrival
-           │     │        │                         └─ 次へ →
-           │     │        │                          true_room
-           │     │        │                            └─ 次へ →
-           │     │        │                             true_photo18
-           │     │        │                               └─ 次へ →
-           │     │        │                                true_photo23
-           │     │        │                                  └─ 次へ →
-           │     │        │                                   true_bbq
-           │     │        │                                     └─ 次へ →
-           │     │        │                                      true_light
-           │     │        │                                        └─ 次へ →
-           │     │        │                                         true_crime
-           │     │        │                                           └─ 次へ →
-           │     │        │                                            true_detected
-           │     │        │                                              └─ 次へ →
-           │     │        │                                               true_wound
-           │     │        │                                                 └─ 次へ →
-           │     │        │                                                  true_review
-           │     │        │                                                    └─ 次へ →
-           │     │        │                                                     true_outside
-           │     │        │                                                       └─ 次へ →
-           │     │        │                                                        true_leave
-           │     │        │                                                          └─ 次へ →
-           │     │        │                                                           true_road
-           │     │        │                                                             └─ 次へ →
-           │     │        │                                                              true_bridge
-           │     │        │                                                                └─ 次へ →
-           │     │        │                                                                 true_present
-           │     │        │                                                                   └─ 次へ →
-           │     │        │                                                                    true_terminated
-           │     │        │                                                                      └─ 次へ →
-           │     │        │                                                                       unread_notice
-           │     │        │                                                                         └─ 開く →
-           │     │        │                                                                          unread_0612
-           │     │        │                                                                            └─ 次へ →
-           │     │        │                                                                             final_gate
-           │     │        │                                                                               └─ FINAL INVESTIGATION正答 →
-           │     │        │                                                                                final_truth
-           │     │        │                                                                                  └─ 次へ →
-           │     │        │                                                                                   kuse_context
-           │     │        │                                                                                     └─ 次へ →
-           │     │        │                                                                                      kuse_choice
-           │     │        │                                                                                        └─ 次へ →
-           │     │        │                                                                                         yuma_decision
-           │     │        │                                                                                           └─ 次へ →
-           │     │        │                                                                                            evidence_package
-           │     │        │                                                                                              └─ 次へ →
-           │     │        │                                                                                               finish_prompt_old
-           │     │        │                                                                                                 └─ 次へ →
-           │     │        │                                                                                                  finish_prompt
-           │     │        │                                                                                                    └─ 終了する →
-           │     │        │                                                                                                     end16 (END16: 七人目の夏)
-           │     │          ├─ 美咲に送ってもらう →
-           │     │        │  photo_send
-           │     │        │    └─ 次へ →
-           │     │        │     bbq
-           │     │        │       └─ [既出sceneへ合流]
-           │     │          └─ 気にしない →
-           │     │           bbq
-           │     │             └─ [既出sceneへ合流]
-           │       ├─ キッチン →
-           │     │  explore_kitchen
-           │     │    └─ 次へ →
-           │     │     photo_setup
-           │     │       └─ [既出sceneへ合流]
-           │       ├─ 二階 →
-           │     │  explore_roomd
-           │     │    └─ 次へ →
-           │     │     photo_setup
-           │     │       └─ [既出sceneへ合流]
-           │       ├─ 駐車場 →
-           │     │  explore_parking
-           │     │    └─ 次へ →
-           │     │     photo_setup
-           │     │       └─ [既出sceneへ合流]
-           │       └─ 荷物置場 →
-           │        explore_bags
-           │          └─ 次へ →
-           │           photo_setup
-           │             └─ [既出sceneへ合流]
-             ├─ 廃トンネルについて聞く →
-           │  ask_tunnel
-           │    └─ 次へ →
-           │     explore_intro
-           │       └─ [既出sceneへ合流]
-             └─ 特に聞かない →
-              ask_nothing
-                └─ 次へ →
-                 explore_intro
-                   └─ [既出sceneへ合流]
+           arrival_friends
+             └─ 次へ →
+              arrival_kuse
+                ├─ 山荘について聞く →
+              │  ask_lodge
+              │    └─ 次へ →
+              │     explore_intro
+              │       ├─ リビング →
+              │     │  explore_living
+              │     │    └─ 次へ →
+              │     │     photo_setup
+              │     │       └─ 次へ →
+              │     │        photo_question
+              │     │          ├─ 写真を見る →
+              │     │        │  photo_look
+              │     │        │    └─ 次へ →
+              │     │        │     bbq
+              │     │        │       └─ 次へ →
+              │     │        │        bbq_memory
+              │     │        │          ├─ 次へ →
+              │     │        │        │  test_proposal
+              │     │        │        │    ├─ 行く →
+              │     │        │        │  │  night_road
+              │     │        │        │  │    └─ 次へ →
+              │     │        │        │  │     night_monologue
+              │     │        │        │  │       └─ 次へ →
+              │     │        │        │  │        tunnel
+              │     │        │        │  │          ├─ 森川を追う →
+              │     │        │        │  │        │  shrine
+              │     │        │        │  │        │    ├─ 止める →
+              │     │        │        │  │        │  │  wound_appears
+              │     │        │        │  │        │  │    ├─ 傷を見る →
+              │     │        │        │  │        │  │  │  end03 (END03: 傷)
+              │     │        │        │  │        │  │  │    └─ TITLE → START（次周回）
+              │     │        │        │  │        │  │    └─ 気にしない →
+              │     │        │        │  │        │  │     escape_car
+              │     │        │        │  │        │  │       ├─ 徒歩で下山 →
+              │     │        │        │  │        │  │     │  end04 (END04: 帰れない)
+              │     │        │        │  │        │  │     │    └─ TITLE → START（次周回）
+              │     │        │        │  │        │  │       └─ 山荘へ戻る →
+              │     │        │        │  │        │  │        end05 (END05: 呪われた六人)
+              │     │        │        │  │        │  │          └─ TITLE → START（次周回）
+              │     │        │        │  │        │    ├─ 止めない →
+              │     │        │        │  │        │  │  shrine_touch
+              │     │        │        │  │        │  │    └─ 次へ →
+              │     │        │        │  │        │  │     lodge_knock
+              │     │        │        │  │        │  │       ├─ 玄関を開ける →
+              │     │        │        │  │        │  │     │  end01 (END01: 触れてはいけない)
+              │     │        │        │  │        │  │     │    └─ TITLE → START（次周回）
+              │     │        │        │  │        │  │       ├─ 開けない →
+              │     │        │        │  │        │  │     │  seven_steps
+              │     │        │        │  │        │  │     │    ├─ 人数を数える →
+              │     │        │        │  │        │  │     │  │  end02 (END02: 六人目の足音)
+              │     │        │        │  │        │  │     │  │    └─ TITLE → START（次周回）
+              │     │        │        │  │        │  │     │    ├─ 振り返る →
+              │     │        │        │  │        │  │     │  │  end05 (END05: 呪われた六人)
+              │     │        │        │  │        │  │     │  │    └─ [既出sceneへ合流]
+              │     │        │        │  │        │  │     │    └─ 外へ走る →
+              │     │        │        │  │        │  │     │     escape_car
+              │     │        │        │  │        │  │     │       └─ [既出sceneへ合流]
+              │     │        │        │  │        │  │       └─ 二階へ逃げる →
+              │     │        │        │  │        │  │        roomd_night
+              │     │        │        │  │        │  │          ├─ ベッドを見る →
+              │     │        │        │  │        │  │        │  end02 (END02: 六人目の足音)
+              │     │        │        │  │        │  │        │    └─ [既出sceneへ合流]
+              │     │        │        │  │        │  │          ├─ 充電ケーブルを見る →
+              │     │        │        │  │        │  │        │  end02 (END02: 六人目の足音)
+              │     │        │        │  │        │  │        │    └─ [既出sceneへ合流]
+              │     │        │        │  │        │  │          └─ 逃げる →
+              │     │        │        │  │        │  │           end05 (END05: 呪われた六人)
+              │     │        │        │  │        │  │             └─ [既出sceneへ合流]
+              │     │        │        │  │        │    └─ 祠を撮影する →
+              │     │        │        │  │        │     forest_light
+              │     │        │        │  │        │       ├─ 遠くから撮影する →
+              │     │        │        │  │        │     │  crime_photo
+              │     │        │        │  │        │     │    ├─ 拡大する →
+              │     │        │        │  │        │     │  │  end06 (END06: 見てはいけない写真)
+              │     │        │        │  │        │     │  │    └─ TITLE → START（次周回）
+              │     │        │        │  │        │     │    ├─ 削除する →
+              │     │        │        │  │        │     │  │  end07 (END07: 写真を消せ)
+              │     │        │        │  │        │     │  │    └─ TITLE → START（次周回）
+              │     │        │        │  │        │     │    └─ 山荘へ戻る →
+              │     │        │        │  │        │     │     invasion
+              │     │        │        │  │        │     │       ├─ スマホを隠す →
+              │     │        │        │  │        │     │     │  end08 (END08: 管理人)
+              │     │        │        │  │        │     │     │    └─ TITLE → START（次周回）
+              │     │        │        │  │        │     │       ├─ 写真を削除 →
+              │     │        │        │  │        │     │     │  end07 (END07: 写真を消せ)
+              │     │        │        │  │        │     │     │    └─ [既出sceneへ合流]
+              │     │        │        │  │        │     │       └─ 外へ逃げる →
+              │     │        │        │  │        │     │        chase
+              │     │        │        │  │        │     │          ├─ 返信する →
+              │     │        │        │  │        │     │        │  reply_unknown
+              │     │        │        │  │        │     │        │    └─ 次へ →
+              │     │        │        │  │        │     │        │     end09 (END09: 追跡者)
+              │     │        │        │  │        │     │        │       └─ TITLE → START（次周回）
+              │     │        │        │  │        │     │          ├─ スマホを捨てる →
+              │     │        │        │  │        │     │        │  end09 (END09: 追跡者)
+              │     │        │        │  │        │     │        │    └─ [既出sceneへ合流]
+              │     │        │        │  │        │     │          └─ 警察へ電話する →
+              │     │        │        │  │        │     │           end10 (END10: 全員生還)
+              │     │        │        │  │        │     │             └─ TITLE → START（次周回）
+              │     │        │        │  │        │       ├─ 近づく →
+              │     │        │        │  │        │     │  kuse_notice
+              │     │        │        │  │        │     │    └─ 次へ →
+              │     │        │        │  │        │     │     invasion
+              │     │        │        │  │        │     │       └─ [既出sceneへ合流]
+              │     │        │        │  │        │       └─ みんなに知らせる →
+              │     │        │        │  │        │        kuse_notice
+              │     │        │        │  │        │          └─ [既出sceneへ合流]
+              │     │        │        │  │          ├─ 林の光を見る →
+              │     │        │        │  │        │  forest_light
+              │     │        │        │  │        │    └─ [既出sceneへ合流]
+              │     │        │        │  │          └─ 山荘へ戻る →
+              │     │        │        │  │           escape_car
+              │     │        │        │  │             └─ [既出sceneへ合流]
+              │     │        │        │    ├─ 行かない →
+              │     │        │        │  │  murder_stay
+              │     │        │        │  │    └─ 次へ →
+              │     │        │        │  │     body_found
+              │     │        │        │  │       └─ 次へ →
+              │     │        │        │  │        murder_investigation
+              │     │        │        │  │          ├─ 藤堂が犯人だ →
+              │     │        │        │  │        │  end11 (END11: 犯人は藤堂)
+              │     │        │        │  │        │    └─ TITLE → START（次周回）
+              │     │        │        │  │          ├─ 佐久間のスマートフォン →
+              │     │        │        │  │        │  message_2351
+              │     │        │        │  │        │    └─ 次へ →
+              │     │        │        │  │        │     end12 (END12: 23時51分)
+              │     │        │        │  │        │       └─ TITLE → START（次周回）
+              │     │        │        │  │          ├─ 空室D →
+              │     │        │        │  │        │  unknown_room
+              │     │        │        │  │        │    └─ 次へ →
+              │     │        │        │  │        │     end13 (END13: 空室)
+              │     │        │        │  │        │       └─ TITLE → START（次周回）
+              │     │        │        │  │          └─ 集合写真再検証 [`END02` OR `END13` のいずれか取得済み] →
+              │     │        │        │  │           photographer_question
+              │     │        │        │  │             └─ 次へ →
+              │     │        │        │  │              end14 (END14: 撮影者)
+              │     │        │        │  │                └─ TITLE → START（次周回）
+              │     │        │        │    └─ まだ決めない [state.`loopCount` = true] →
+              │     │        │        │     night_road
+              │     │        │        │       └─ [既出sceneへ合流]
+              │     │        │          └─ 誰もいない席を見る [canUnlockEnd15(state) = true] →
+              │     │        │           empty_seat
+              │     │        │             └─ 次へ →
+              │     │        │              unknown_phone
+              │     │        │                └─ 次へ →
+              │     │        │                 end15 (END15: 存在しない人)
+              │     │        │                   └─ TITLE→INVESTIGATION正答 →
+              │     │        │                    investigation_restored
+              │     │        │                      └─ 次へ →
+              │     │        │                       true_arrival
+              │     │        │                         └─ 次へ →
+              │     │        │                          true_room
+              │     │        │                            └─ 次へ →
+              │     │        │                             true_photo18
+              │     │        │                               └─ 次へ →
+              │     │        │                                true_photo23
+              │     │        │                                  └─ 次へ →
+              │     │        │                                   true_bbq
+              │     │        │                                     └─ 次へ →
+              │     │        │                                      true_light
+              │     │        │                                        └─ 次へ →
+              │     │        │                                         true_crime
+              │     │        │                                           └─ 次へ →
+              │     │        │                                            true_detected
+              │     │        │                                              └─ 次へ →
+              │     │        │                                               true_wound
+              │     │        │                                                 └─ 次へ →
+              │     │        │                                                  true_review
+              │     │        │                                                    └─ 次へ →
+              │     │        │                                                     true_outside
+              │     │        │                                                       └─ 次へ →
+              │     │        │                                                        true_leave
+              │     │        │                                                          └─ 次へ →
+              │     │        │                                                           true_road
+              │     │        │                                                             └─ 次へ →
+              │     │        │                                                              true_bridge
+              │     │        │                                                                └─ 次へ →
+              │     │        │                                                                 true_present
+              │     │        │                                                                   └─ 次へ →
+              │     │        │                                                                    true_terminated
+              │     │        │                                                                      └─ 次へ →
+              │     │        │                                                                       unread_notice
+              │     │        │                                                                         └─ 開く →
+              │     │        │                                                                          unread_0612
+              │     │        │                                                                            └─ 次へ →
+              │     │        │                                                                             final_gate
+              │     │        │                                                                               └─ FINAL INVESTIGATION正答 →
+              │     │        │                                                                                final_truth
+              │     │        │                                                                                  └─ 次へ →
+              │     │        │                                                                                   kuse_context
+              │     │        │                                                                                     └─ 次へ →
+              │     │        │                                                                                      kuse_choice
+              │     │        │                                                                                        └─ 次へ →
+              │     │        │                                                                                         yuma_decision
+              │     │        │                                                                                           └─ 次へ →
+              │     │        │                                                                                            evidence_package
+              │     │        │                                                                                              └─ 次へ →
+              │     │        │                                                                                               finish_prompt_old
+              │     │        │                                                                                                 └─ 次へ →
+              │     │        │                                                                                                  finish_prompt
+              │     │        │                                                                                                    └─ 終了する →
+              │     │        │                                                                                                     end16 (END16: 七人目の夏)
+              │     │          ├─ 美咲に送ってもらう →
+              │     │        │  photo_send
+              │     │        │    └─ 次へ →
+              │     │        │     bbq
+              │     │        │       └─ [既出sceneへ合流]
+              │     │          └─ 気にしない →
+              │     │           bbq
+              │     │             └─ [既出sceneへ合流]
+              │       ├─ キッチン →
+              │     │  explore_kitchen
+              │     │    └─ 次へ →
+              │     │     photo_setup
+              │     │       └─ [既出sceneへ合流]
+              │       ├─ 二階 →
+              │     │  explore_roomd
+              │     │    └─ 次へ →
+              │     │     photo_setup
+              │     │       └─ [既出sceneへ合流]
+              │       ├─ 駐車場 →
+              │     │  explore_parking
+              │     │    └─ 次へ →
+              │     │     photo_setup
+              │     │       └─ [既出sceneへ合流]
+              │       └─ 荷物置場 →
+              │        explore_bags
+              │          └─ 次へ →
+              │           photo_setup
+              │             └─ [既出sceneへ合流]
+                ├─ 廃トンネルについて聞く →
+              │  ask_tunnel
+              │    └─ 次へ →
+              │     explore_intro
+              │       └─ [既出sceneへ合流]
+                └─ 特に聞かない →
+                 ask_nothing
+                   └─ 次へ →
+                    explore_intro
+                      └─ [既出sceneへ合流]
 ```
 
 - 到達不能scene（条件を無視した構造到達性）: なし
@@ -6368,7 +6535,7 @@ START →
 - 存在しないasset slotへのscene参照: なし
 - asset slotはあるが実ファイルが存在しない参照: なし
 - 使用されていないasset slot: なし
-- asset slotへ登録されていない画像ファイル: `public/assets/reference/01_character_roster_9.png`、`public/assets/reference/02_lodge_and_kuse_suv_reference.png`、`public/assets/reference/03_group_photos_1718_1723_reference.png`、`public/assets/reference/04_storyboard_60_images_reference.png`
+- asset slotへ登録されていない画像ファイル: `public/assets/generated/character_aizawa_naoki.png`、`public/assets/generated/character_komiya_ayaka.png`、`public/assets/generated/character_kuze_ryuichi.png`、`public/assets/generated/character_mizuno_misaki.png`、`public/assets/generated/character_morikawa_takumi.png`、`public/assets/generated/character_sakuma_ryo.png`、`public/assets/generated/character_takase_yuma.png`、`public/assets/generated/character_todo_keisuke.png`、`public/assets/reference/01_character_roster_9.png`、`public/assets/reference/02_lodge_and_kuse_suv_reference.png`、`public/assets/reference/03_group_photos_1718_1723_reference.png`、`public/assets/reference/04_storyboard_60_images_reference.png`
 - 条件が成立せず到達不能なEND: なし
 - 自己循環して抜けられない分岐: なし
 - 同一flagの表記揺れ: 自動検出上なし
