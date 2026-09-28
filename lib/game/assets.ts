@@ -7,6 +7,7 @@ export const assetSlots: Record<string, { src: string; position?: string; crop?:
   bbq_1805: { src: "/assets/generated/bbq_1805.png", position: "center" },
   tunnel_shrine_2202: { src: "/assets/generated/tunnel_shrine_2202.png", position: "center" },
   lodge_blackout_2310: { src: "/assets/generated/lodge_blackout_2310.png", position: "center" },
+  lodge_return_night_2310: { src: "/assets/generated/lodge_return_night_2310.png", position: "center" },
   suv: { src: "/assets/generated/kuse_suv.png", position: "center" },
   group_1718: { src: "/assets/generated/group_1718.png", position: "center" },
   group_1718_hq: { src: "/assets/generated/group_1718.png", position: "center" },

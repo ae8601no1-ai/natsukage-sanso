@@ -89,6 +89,12 @@ test("the opening introduces the tunnel shrine before arrival dialogue", () => {
   assert.equal(sceneMap.opening_rumor.text.includes("山から帰れない"), true);
 });
 
+test("the lodge return after the shrine uses the dedicated night image", () => {
+  assert.equal(sceneMap.shrine_touch.nextScene, "lodge_knock");
+  assert.equal(sceneMap.lodge_knock.time, "23:10");
+  assert.equal(sceneMap.lodge_knock.image, "lodge_return_night_2310");
+});
+
 test("Naoki is hidden from character introductions until END15", () => {
   assert.equal(visibleCharacterProfiles(false).some((profile) => profile.name === "相沢 直樹"), false);
   assert.equal(visibleCharacterProfiles(true).some((profile) => profile.name === "相沢 直樹"), true);

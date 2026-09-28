@@ -1,6 +1,6 @@
 # NATSUKAGE IMPLEMENTATION REVIEW
 
-生成日時: 2026-09-28T13:45:46.436Z
+生成日時: 2026-09-28T13:56:50.119Z
 
 > この文書は現在のソースコードから生成した実装監査資料です。仕様書上の予定ではなく、`lib/game/scenes.ts`、`state.ts`、`answers.ts`、`evidence.ts`、`assets.ts`、`app/page.tsx` の現実装を正としています。秘密情報、Cookie、環境変数の実値は含みません。
 
@@ -1219,8 +1219,8 @@ BBQが終わった夜、森川が旅行前から話していた廃トンネル�
 - scene ID: `lodge_knock`
 - 画面タイトル: 夏影山荘 / LODGE_KNOCK
 - 表示時刻: `23:10`
-- 使用画像slot: `lodge_blackout_2310`
-- 使用画像ファイル名: `lodge_blackout_2310.png`
+- 使用画像slot: `lodge_return_night_2310`
+- 使用画像ファイル名: `lodge_return_night_2310.png`
 - 表示条件: なし
 - セットされるflag: なし
 - 必要flag: なし
@@ -5117,7 +5117,7 @@ FINAL RECORD RESTORED
 
 ## 4. 全画像アセット一覧
 
-実ファイル数: **33**
+実ファイル数: **34**
 
 ### bbq_1805.png
 
@@ -5260,8 +5260,16 @@ FINAL RECORD RESTORED
 - ファイル名: `lodge_blackout_2310.png`
 - パス: `public/assets/generated/lodge_blackout_2310.png`
 - asset slot: `lodge_blackout_2310`
-- 使用scene: `lodge_knock`、`escape_car`、`true_review`、`true_outside`
-- 用途: scene:lodge_knock / scene:escape_car / scene:true_review / scene:true_outside
+- 使用scene: `escape_car`、`true_review`、`true_outside`
+- 用途: scene:escape_car / scene:true_review / scene:true_outside
+
+### lodge_return_night_2310.png
+
+- ファイル名: `lodge_return_night_2310.png`
+- パス: `public/assets/generated/lodge_return_night_2310.png`
+- asset slot: `lodge_return_night_2310`
+- 使用scene: `lodge_knock`
+- 用途: scene:lodge_knock
 
 ### naoki_0815_0612.png
 
@@ -5402,7 +5410,7 @@ FINAL RECORD RESTORED
 - `tunnel` / 指定slot: `tunnel_shrine_2202` / 実ファイル: `public/assets/generated/tunnel_shrine_2202.png` / 存在: **YES**
 - `shrine` / 指定slot: `tunnel_shrine_2202` / 実ファイル: `public/assets/generated/tunnel_shrine_2202.png` / 存在: **YES**
 - `shrine_touch` / 指定slot: `tunnel_shrine_2202` / 実ファイル: `public/assets/generated/tunnel_shrine_2202.png` / 存在: **YES**
-- `lodge_knock` / 指定slot: `lodge_blackout_2310` / 実ファイル: `public/assets/generated/lodge_blackout_2310.png` / 存在: **YES**
+- `lodge_knock` / 指定slot: `lodge_return_night_2310` / 実ファイル: `public/assets/generated/lodge_return_night_2310.png` / 存在: **YES**
 - `roomd_night` / 指定slot: `room_d_charger` / 実ファイル: `public/assets/generated/room_d_charger.png` / 存在: **YES**
 - `escape_car` / 指定slot: `lodge_blackout_2310` / 実ファイル: `public/assets/generated/lodge_blackout_2310.png` / 存在: **YES**
 - `forest_light` / 指定slot: `crime_2231` / 実ファイル: `public/assets/generated/crime_2231.png` / 存在: **YES**
