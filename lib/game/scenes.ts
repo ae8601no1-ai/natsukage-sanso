@@ -42,7 +42,7 @@ const baseScenes:Scene[]=[
   {id:"chase",time:"",speaker:"UNKNOWN／悠真",text:"写真を返してくれ\n\n誰も傷つけるつもりはない\n\n「……何なんだよ」",choices:[{label:"返信する",nextScene:"reply_unknown",unlockEvidence:["unknown_messages"]},{label:"スマホを捨てる",nextScene:"end09",unlockEvidence:["unknown_messages"]},{label:"警察へ電話する",nextScene:"end10",unlockEvidence:["survival_record"]}]},
   {id:"reply_unknown",time:"",speaker:"悠真・入力／UNKNOWN／悠真",text:"あなたは誰ですか\n\n写真だけ返してくれ\n\nそれで終わる\n\n「信用できるかよ……」",nextScene:"end09"},
   {id:"murder_stay",time:"22:15",speaker:"悠真／小宮／森川／佐久間",text:"「俺はやめとく」\n\n「私も」\n\n「つまんねーの」\n\n「雨も降りそうだしな」",nextScene:"body_found"},
-  {id:"body_found",time:"23:34",speaker:"美咲／小宮／悠真／藤堂／森川／悠真・モノローグ",text:"「佐久間、どこ行った？」\n\n「さっき二階にいた」\n\nドン。\n\n「亮！」\n\n「触らないで！」\n\n「佐久間！」\n\n「……死んでる」\n\n「嘘だろ」\n\nこの山荘にいるのは、\n\n俺たちだけ。\n\nなら。\n\n佐久間を殺したのは――\n\nここにいる誰かだ。",nextScene:"murder_investigation"},
+  {id:"body_found",time:"23:34",speaker:"美咲／小宮／悠真／藤堂／森川／悠真・モノローグ",text:"「佐久間、どこ行った？」\n\n「さっき二階にいた」\n\n俺たちは手分けして山荘内を探し、二階へ上がった。\n\nドン。\n\n「亮！」\n\n「触らないで！」\n\n「佐久間！」\n\n「……死んでる」\n\n「嘘だろ」\n\nこの山荘にいるのは、\n\n俺たちだけ。\n\nなら。\n\n佐久間を殺したのは――\n\nここにいる誰かだ。",nextScene:"murder_investigation"},
   {id:"murder_investigation",time:"",speaker:"システム",text:"3か所調査してください。",choices:[{label:"藤堂が犯人だ",nextScene:"end11"},{label:"佐久間のスマートフォン",nextScene:"message_2351"},{label:"空室D",nextScene:"unknown_room"},{label:"集合写真再検証",nextScene:"photographer_question",conditions:[{endingsAny:["END02","END13"]}]}]},
   {id:"message_2351",time:"23:51",speaker:"佐久間のスマートフォン／悠真／小宮／藤堂／森川",text:"お前ら、まだ外？\n\n「……待って」\n\n「どうしたの？」\n\n「佐久間が死んだのは？」\n\n「23時48分頃」\n\n「じゃあ、誰が送った？」\n\n一人足りない。",nextScene:"end12"},
   {id:"unknown_room",time:"",image:"unknown_camera_bag",speaker:"悠真／小宮／美咲",text:"「これ……」\n\n「誰の？」\n\nA—— N——\n\n「私たちのじゃないよね」\n\n「……。」",nextScene:"end13"},
@@ -150,7 +150,7 @@ const narrationByScene: Record<string, string> = {
   invasion: "写真を持ったまま山荘へ戻ったが、外には俺たちを追ってきた気配があった。狙われているのは写真だと思った。",
   chase: "山荘を飛び出して逃げると、知らない送信者から写真を返すようメッセージが届いた。",
   murder_stay: "俺たちは肝試しへ行かず、山荘に残ることにした。だが、それで何事もなく朝を迎えられるわけではなかった。",
-  body_found: "夜が深まり、姿の見えなくなった佐久間を探して二階へ上がった。そこで倒れている佐久間を見つけた。",
+  body_found: "夜が深まり、気づくと佐久間の姿が見えなくなっていた。最後に見たのは、二階へ向かうところだった。",
   murder_investigation: "外部から誰かが入った形跡はない。俺たちは山荘内に残された物と、それぞれの行動を調べ始めた。",
   message_2351: "佐久間のスマートフォンを調べると、倒れている本人の名前で新しいメッセージが届いた。",
   unknown_room: "空室のはずの寝室Dには、誰かが滞在していたとしか思えない痕跡が残っていた。",
@@ -172,10 +172,16 @@ function addNamesToDialogue(scene: Scene): Scene {
   const names = speakerSequences[scene.id] ?? scene.speaker.split("／");
   const exactSequence = names.length === dialogueIndexes.length;
   let dialogueIndex = 0;
+  let previousName = "";
   const text = blocks.map((block, index) => {
-    if (!dialogueIndexes.includes(index)) return block;
+    if (!dialogueIndexes.includes(index)) {
+      if (block.trim()) previousName = "";
+      return block;
+    }
     const name = names.length === 1 ? names[0] : exactSequence ? names[dialogueIndex] : scene.speaker;
     dialogueIndex += 1;
+    if (name === previousName) return block;
+    previousName = name;
     return `【${name}】\n${block}`;
   }).join("\n\n");
 

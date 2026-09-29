@@ -106,3 +106,17 @@ test("all scene transitions reference existing scenes", () => {
     for (const choice of scene.choices ?? []) assert.ok(sceneMap[choice.nextScene], `${scene.id} -> ${choice.nextScene}`);
   }
 });
+
+test("consecutive dialogue from the same speaker shares one name label", () => {
+  assert.equal((sceneMap.arrival_kuse.text.match(/【久世】/g) ?? []).length, 1);
+  assert.equal((sceneMap.true_present.text.match(/【悠真】/g) ?? []).length, 1);
+});
+
+test("Sakuma is searched for before he is found", () => {
+  const text = sceneMap.body_found.text;
+  const missing = text.indexOf("佐久間の姿が見えなくなっていた");
+  const search = text.indexOf("山荘内を探し");
+  const found = text.indexOf("……死んでる");
+  assert.ok(missing >= 0 && search > missing && found > search);
+  assert.equal(text.slice(0, search).includes("佐久間を見つけた"), false);
+});
