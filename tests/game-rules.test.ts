@@ -49,10 +49,10 @@ test("investigation and final answers accept specified variants", () => {
   assert.equal(validateFinal(["アイザワナオキ", "6時間16分", "くぜりゅういち", "久世隆一"]), true);
 });
 
-test("END03 uses the 22:53 record and the real wound occurs at 22:51", () => {
-  assert.equal(sceneMap.end03.text.includes("20:11"), false);
-  assert.equal(sceneMap.end03.text.includes("22:53"), true);
-  assert.equal(sceneMap.end03.image, "wound_record_2253");
+test("END03 proves the arm was uninjured immediately before the real 22:51 wound", () => {
+  assert.equal(sceneMap.end03.text.includes("22:50"), true);
+  assert.equal(sceneMap.end03.text.includes("傷は、まだない"), true);
+  assert.equal(sceneMap.end03.image, "wound_record_2250_clean");
   assert.equal(sceneMap.true_wound.time, "22:51");
   assert.equal(sceneMap.true_wound.image, "true_wound_2251");
 });
@@ -67,7 +67,9 @@ test("group photo reinspection is a single OR-gated choice", () => {
 
 test("the escape choice explains why the group must leave on foot", () => {
   assert.equal(sceneMap.escape_car.text.includes("エンジンはかからない"), true);
-  assert.equal(sceneMap.escape_car.text.includes("もう一台も確認する"), true);
+  assert.equal(sceneMap.escape_car.text.includes("久世のSUV"), true);
+  assert.equal(sceneMap.escape_car.text.includes("ドアに鍵がかかっていた"), true);
+  assert.equal(sceneMap.escape_car.text.includes("管理棟に向かって呼びかけても、返事はない"), true);
   assert.deepEqual(sceneMap.escape_car.choices?.map((choice) => choice.label), ["徒歩で下山", "山荘へ戻る"]);
 });
 
@@ -100,6 +102,27 @@ test("story conversation and parking scenes use images matching their content", 
   assert.deepEqual(parkingChoice?.unlockEvidence, ["kuse_car_seen"]);
   assert.equal(sceneMap.explore_parking.image, "suv");
   assert.equal(sceneMap.explore_parking.nextScene, "photo_setup");
+  assert.equal(sceneMap.forest_light.image, "forest_light_2227");
+  assert.notEqual(sceneMap.forest_light.image, "crime_2231");
+});
+
+test("shared tunnel dialogue does not assume the optional Kuse warning was heard", () => {
+  assert.equal(sceneMap.test_proposal.text.includes("久世さん、行くなって言ってた"), false);
+  assert.equal(sceneMap.wound_appears.text.includes("管理人も言ってた"), false);
+});
+
+test("the defer choice explains the later decision to follow Morikawa", () => {
+  const choice = sceneMap.test_proposal.choices?.find((item) => item.label === "まだ決めない");
+  assert.equal(choice?.nextScene, "decision_later");
+  assert.equal(sceneMap.decision_later.nextScene, "night_road");
+  assert.equal(sceneMap.decision_later.text.includes("結局、俺たちも後を追う"), true);
+});
+
+test("END01 reflects opening the door and uses the following morning", () => {
+  assert.equal(sceneMap.end01.text.includes("扉を開ける"), true);
+  assert.equal(sceneMap.end01.text.includes("外には誰もいない"), true);
+  assert.equal(sceneMap.end01.text.includes("8月15日、午前8時14分"), true);
+  assert.equal(sceneMap.end01.text.includes("8月14日、午前8時14分"), false);
 });
 
 test("normal-route images do not visually disclose the seventh participant", () => {

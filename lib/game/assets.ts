@@ -23,6 +23,8 @@ export const assetSlots: Record<string, { src: string; position?: string; crop?:
   true_end: { src: "/assets/generated/true_end_group_1723.png", position: "center" },
   true_wound_2251: { src: "/assets/generated/true_wound_2251.png", position: "center" },
   wound_record_2253: { src: "/assets/generated/wound_record_2253.png", position: "center" },
+  wound_record_2250_clean: { src: "/assets/generated/wound_record_2250_clean.png", position: "center" },
+  forest_light_2227: { src: "/assets/generated/forest_light_2227.png", position: "center" },
   roadcam_0625: { src: "/assets/generated/roadcam_0625.png", position: "center" },
   kuse_naoki_final: { src: "/assets/generated/kuse_naoki_final.png", position: "center" },
   room_d_true: { src: "/assets/generated/room_d_true.png", position: "center" },
