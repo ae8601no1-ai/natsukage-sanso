@@ -89,6 +89,17 @@ test("the opening introduces the tunnel shrine before arrival dialogue", () => {
   assert.equal(sceneMap.opening_rumor.text.includes("山から帰れない"), true);
 });
 
+test("story conversation and parking scenes use images matching their content", () => {
+  assert.equal(sceneMap.opening_rumor.image, "bbq_1805");
+  assert.notEqual(sceneMap.opening_rumor.image, "tunnel_shrine_2202");
+
+  const parkingChoice = sceneMap.explore_intro.choices?.find((choice) => choice.label === "駐車場");
+  assert.equal(parkingChoice?.nextScene, "explore_parking");
+  assert.deepEqual(parkingChoice?.unlockEvidence, ["kuse_car_seen"]);
+  assert.equal(sceneMap.explore_parking.image, "suv");
+  assert.equal(sceneMap.explore_parking.nextScene, "photo_setup");
+});
+
 test("the lodge return after the shrine uses the dedicated night image", () => {
   assert.equal(sceneMap.shrine_touch.nextScene, "lodge_knock");
   assert.equal(sceneMap.lodge_knock.time, "23:10");

@@ -6,7 +6,7 @@ const end=(id:string,text:string,unlockEvidence:string[]=[],image?:string):Scene
 const baseScenes:Scene[]=[
   {id:"arrival",time:"AUGUST 14",speaker:"悠真・モノローグ",text:"大学最後の夏だった。\n\n佐久間が見つけてきた山奥の貸山荘で、\n\n一泊して、\n\nバーベキューをして、\n\nくだらない話をして。\n\nそれだけの旅行になるはずだった。",nextScene:"arrival_time"},
   {id:"arrival_time",time:"16:37",speaker:"悠真・モノローグ",text:"――あの夜。\n\n肝試しなんかしなければ。\n\nたぶん、\n\n何も起きなかった。",nextScene:"opening_rumor"},
-  {id:"opening_rumor",time:"旅行前の記憶",image:"tunnel_shrine_2202",speaker:"悠真・モノローグ",text:"佐久間がこの山荘を見つけた時、近くに使われなくなった廃トンネルがあることも話題になった。\n\nその入口のそばには、古い祠が残されているらしい。\n\n『祠に触れた者は、山から帰れない』。\n\n森川が見つけてきたのは、そんな書き込みだった。\n\nあいつは肝試しに行こうと笑い、俺たちも、その時はただの作り話だと思っていた。",nextScene:"arrival_friends"},
+  {id:"opening_rumor",time:"旅行前の記憶",image:"bbq_1805",speaker:"悠真・モノローグ",text:"佐久間がこの山荘を見つけた時、近くに使われなくなった廃トンネルがあることも話題になった。\n\nその入口のそばには、古い祠が残されているらしい。\n\n『祠に触れた者は、山から帰れない』。\n\n森川が見つけてきたのは、そんな書き込みだった。\n\nあいつは肝試しに行こうと笑い、俺たちも、その時はただの作り話だと思っていた。",nextScene:"arrival_friends"},
   {id:"arrival_friends",time:"16:37",image:"lodge_arrival_1637",speaker:"佐久間／森川／美咲／小宮／藤堂",text:"「着いたー！」\n\n「遠すぎだろ。コンビニから何分走った？」\n\n「でも、いいじゃん。写真で見たより全然いい」\n\n「虫すごいけどね」\n\n「山に来て虫に文句言うなよ」\n\n「森川には言われたくない」\n\n「荷物、先に入れよう」",nextScene:"arrival_kuse"},
   {id:"arrival_kuse",time:"16:40",image:"lodge_arrival_1637",speaker:"久世 隆一",text:"「高瀬さんたちですね？」\n\n「管理人の久世です」\n\n「今日は皆さんだけですから、ゆっくりしてください」\n\n「一階がリビングとキッチン」\n\n「寝室は二階です」\n\n「何かあったら管理棟にいますから」",choices:[{label:"山荘について聞く",nextScene:"ask_lodge"},{label:"廃トンネルについて聞く",nextScene:"ask_tunnel",setFlags:["heard_tunnel_warning"]},{label:"特に聞かない",nextScene:"ask_nothing"}]},
   {id:"ask_lodge",time:"16:42",speaker:"悠真／久世",text:"「ここ、結構古いんですか？」\n\n「ええ。もうずいぶんになります」\n\n「昔はもっとお客さんも多かったんですけどね」\n\n「まあ、古いぶん不便なところもあります」\n\n「夜は足元に気をつけてください」",nextScene:"explore_intro"},
@@ -16,7 +16,7 @@ const baseScenes:Scene[]=[
   {id:"explore_living",time:"16:55",image:"living_seven_cups",speaker:"悠真／森川／小宮",text:"「結構広いな」\n\n「夜になったら雰囲気ありそう」\n\n「やめてよ」",nextScene:"photo_setup"},
   {id:"explore_kitchen",time:"16:56",image:"receipt_1528",speaker:"悠真／佐久間",text:"「買いすぎじゃないか？」\n\n「余るくらいでちょうどいいんだよ」\n\n「これ、誰か財布に入れとけよ」\n\n「あとでいいって」",nextScene:"photo_setup"},
   {id:"explore_roomd",time:"16:57",image:"room_d_charger",speaker:"悠真／美咲",text:"「Dは誰も使わないんだっけ」\n\n「……？」\n\n「どうしたの？」\n\n「いや」\n\n「前の客の忘れ物かな」\n\n「管理人さんにあとで言っとけば？」\n\n「そうだな」",nextScene:"photo_setup"},
-  {id:"explore_parking",time:"16:58",speaker:"佐久間／悠真",text:"「あれ、管理人さんのかな」\n\n「たぶん」\n\n「山じゃこういう車が便利なんだろうな」",nextScene:"photo_setup"},
+  {id:"explore_parking",time:"16:58",image:"suv",speaker:"佐久間／悠真",text:"「あれ、管理人さんのかな」\n\n「たぶん」\n\n「山じゃこういう車が便利なんだろうな」",nextScene:"photo_setup"},
   {id:"explore_bags",time:"16:59",image:"unknown_camera_bag",speaker:"悠真／森川",text:"「……これ誰のだ？」\n\n「悠真ー！　肉どこ入れたー？」\n\n「知らねえよ！」",nextScene:"photo_setup"},
   {id:"photo_setup",time:"17:18",image:"group_1718",speaker:"美咲／佐久間",text:"「せっかくだから写真撮ろうよ」\n\n「いいね」",nextScene:"photo_question"},
   {id:"photo_question",time:"IMG_0814_171842.jpg",image:"group_1718",speaker:"",text:"高瀬悠真\n佐久間亮\n森川拓海\n水野美咲\n小宮彩香\n藤堂圭介",choices:[{label:"写真を見る",nextScene:"photo_look",unlockEvidence:["group_photo_saved"]},{label:"美咲に送ってもらう",nextScene:"photo_send",unlockEvidence:["group_photo_saved"]},{label:"気にしない",nextScene:"bbq"}]},
