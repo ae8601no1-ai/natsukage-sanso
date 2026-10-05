@@ -14,6 +14,8 @@ export const evidence: Evidence[] = [
   { id: "damaged_name_tag", title: "破損したネームタグ", category: "ITEM", description: "A—— N——。カメラバッグに残っていた断片。", image: "damaged_name_tag", zoomable: true },
   { id: "group_photo_hq", title: "17:18 反射部復元", category: "PHOTO", description: "ガラスにカメラを構える人物が薄く映る。", image: "group_1718_hq", zoomable: true },
   { id: "naoki_0612_photo", title: "NAOKI_0815_0612.jpg", category: "PHOTO", description: "橋の崩落から6時間16分後。路上を歩く人物。", image: "naoki_0612", zoomable: true },
+  { id: "vehicle_1723_record", title: "17:23 山荘前記録", category: "PHOTO", description: "山荘前に停車する濃紺のSUV。左後部の傷と山型ステッカーを確認できる。", image: "vehicle_1723_record", zoomable: true },
+  { id: "vehicle_2235_record", title: "22:35 林道記録", category: "PHOTO", description: "林道脇の濃紺のSUV。左後部の傷と山型ステッカーが17:23の車両と一致する。", image: "vehicle_2235_record", zoomable: true },
   { id: "kuse_vehicle_match", title: "06:25 路肩カメラ", category: "PHOTO", description: "左後部の傷、山型ステッカー、ホイール形状が一致。", image: "roadcam_0625", zoomable: true },
-  { id: "final_audio", title: "途切れた録音", category: "RECORD", description: "『ここしか、俺には残ってないんだ』――その後、記録は途切れる。" },
+  { id: "final_audio", title: "06:25 音声照合", category: "RECORD", description: "負傷した直樹へ『病院まで送る』と声をかけた人物。管理人記録の音声と照合し、久世隆一と一致。" },
 ];

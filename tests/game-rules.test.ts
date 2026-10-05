@@ -4,6 +4,8 @@ import { validateFinal, validateFinalFields, validateInvestigation, validateInve
 import { endingTitles, sceneMap, scenes } from "../lib/game/scenes.ts";
 import { canUnlockEnd15, initialState, meets } from "../lib/game/state.ts";
 import { visibleCharacterProfiles } from "../lib/game/characters.ts";
+import { assetSlots } from "../lib/game/assets.ts";
+import { evidence } from "../lib/game/evidence.ts";
 
 test("END15 requires eight distinct endings and every required ending", () => {
   assert.equal(canUnlockEnd15({ ...initialState, endings: ["END03", "END10", "END13", "END14", "END01", "END02", "END04"] }), false);
@@ -90,7 +92,7 @@ test("the opening introduces the tunnel shrine before arrival dialogue", () => {
 });
 
 test("story conversation and parking scenes use images matching their content", () => {
-  assert.equal(sceneMap.opening_rumor.image, "bbq_1805");
+  assert.equal(sceneMap.opening_rumor.image, "pretrip_rumor");
   assert.notEqual(sceneMap.opening_rumor.image, "tunnel_shrine_2202");
 
   const parkingChoice = sceneMap.explore_intro.choices?.find((choice) => choice.label === "駐車場");
@@ -98,6 +100,46 @@ test("story conversation and parking scenes use images matching their content", 
   assert.deepEqual(parkingChoice?.unlockEvidence, ["kuse_car_seen"]);
   assert.equal(sceneMap.explore_parking.image, "suv");
   assert.equal(sceneMap.explore_parking.nextScene, "photo_setup");
+});
+
+test("normal-route images do not visually disclose the seventh participant", () => {
+  assert.equal(sceneMap.night_road.image, "night_road_2136");
+  assert.equal(sceneMap.tunnel.image, "tunnel_shrine_six_2202");
+  assert.equal(sceneMap.shrine.image, "tunnel_shrine_six_2202");
+  assert.equal(sceneMap.shrine_touch.image, "tunnel_shrine_six_2202");
+  assert.equal(sceneMap.true_light.image, "tunnel_shrine_2202");
+  assert.notEqual(assetSlots.group_1718.src, assetSlots.group_1718_hq.src);
+});
+
+test("reviewed ending continuity issues remain fixed", () => {
+  assert.equal(sceneMap.end02.text.includes("森川。"), true);
+  assert.deepEqual(sceneMap.roomd_night.choices?.slice(0, 2).map((choice) => choice.nextScene), ["end02_roomd", "end02_roomd"]);
+  assert.equal(sceneMap.end02_roomd.text.includes("廊下を歩く足音"), false);
+  assert.equal(sceneMap.end04.text.includes("さっき、なかった"), false);
+  assert.equal(sceneMap.end04.image, "suv_night");
+  assert.equal(sceneMap.end06.text.includes("急いで山荘へ戻った"), true);
+  assert.deepEqual(sceneMap.end07.unlockEvidence, []);
+  assert.equal(sceneMap.end08.text.includes("管理人を頼るしかなかった"), true);
+  assert.equal(sceneMap.end08.image, "suv_night");
+  assert.equal(sceneMap.end11.text.includes("【佐久間】"), false);
+  assert.equal(sceneMap.body_found.time, "23:48");
+  assert.equal(sceneMap.murder_investigation.text.includes("3か所"), false);
+});
+
+test("final investigation evidence is available before answering", () => {
+  assert.deepEqual(sceneMap.true_photo23.unlockEvidence, ["vehicle_1723_record"]);
+  assert.deepEqual(sceneMap.true_detected.unlockEvidence, ["vehicle_2235_record"]);
+  assert.deepEqual(sceneMap.final_gate.unlockEvidence, ["kuse_vehicle_match", "final_audio"]);
+  for (const id of ["vehicle_1723_record", "vehicle_2235_record", "kuse_vehicle_match", "final_audio"]) {
+    assert.ok(evidence.some((item) => item.id === id), id);
+  }
+  assert.equal(sceneMap.final_gate.text.includes("音声照合：久世隆一"), true);
+});
+
+test("TRUE END asks only to end August 14", () => {
+  assert.equal(sceneMap.evidence_package.nextScene, "finish_prompt");
+  assert.equal(sceneMap.finish_prompt.text, "8月14日を終了しますか？");
+  assert.equal(sceneMap.finish_prompt_old, undefined);
 });
 
 test("the lodge return after the shrine uses the dedicated night image", () => {
