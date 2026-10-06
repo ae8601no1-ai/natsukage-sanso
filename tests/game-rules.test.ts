@@ -52,6 +52,32 @@ test("investigation and final answers accept specified variants", () => {
   assert.equal(validateFinal(["アイザワナオキ", "6時間16分", "くぜりゅういち", "久世隆一"]), true);
 });
 
+test("END13 archive evidence identifies Naoki without changing the ending text", async () => {
+  assert.deepEqual(sceneMap.end13.unlockEvidence, ["room_d_seen", "unknown_bag_seen", "unknown_charger", "damaged_name_tag"]);
+  assert.equal(sceneMap.end13.text.includes("A—— N——"), true);
+  assert.equal(sceneMap.end13.text.includes("相沢直樹"), false);
+
+  const nameTag = evidence.find((item) => item.id === "damaged_name_tag");
+  assert.ok(nameTag);
+  assert.equal(nameTag.image, "damaged_name_tag");
+  assert.equal(nameTag.zoomable, true);
+  assert.match(nameTag.description, /姓は「相沢」/);
+  assert.match(nameTag.description, /名前は「直――」/);
+  assert.match(nameTag.description, /相沢 直樹/);
+  assert.equal(assetSlots.damaged_name_tag.src, "/assets/generated/damaged_name_tag.png");
+
+  const image = await readFile(new URL("../public/assets/generated/damaged_name_tag.png", import.meta.url));
+  assert.equal(image.subarray(1, 4).toString(), "PNG");
+  assert.ok(image.byteLength > 100_000);
+});
+
+test("END14 and END15 retain the intended seventh-person deduction", () => {
+  assert.match(sceneMap.end14.text, /これ……誰が撮ったの？/);
+  assert.match(sceneMap.end14.text, /カメラを構えた人影/);
+  assert.match(sceneMap.end15.text, /PARTICIPANTS：6[\s\S]*PARTICIPANTS：7[\s\S]*DATA CORRUPTED/);
+  assert.equal(validateInvestigation(["7", "はい", "相沢直樹"]), true);
+});
+
 test("END03 proves the arm was uninjured immediately before the real 22:51 wound", () => {
   assert.equal(sceneMap.end03.text.includes("22:50"), true);
   assert.equal(sceneMap.end03.text.includes("傷は、まだない"), true);

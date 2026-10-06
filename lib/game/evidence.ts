@@ -11,7 +11,7 @@ export const evidence: Evidence[] = [
   { id: "unknown_charger", title: "メーカー不明の充電器", category: "ITEM", description: "六人の所持品一覧と一致しない。", image: "room_d_charger", zoomable: true },
   { id: "unknown_messages", title: "UNKNOWNからのメッセージ", category: "MESSAGE", description: "『誰も傷つけるつもりはない』『写真だけ返してくれ』。" },
   { id: "survival_record", title: "生存者記録", category: "RECORD", description: "生還者は6、参加者は7。集計欄に矛盾がある。", image: "survival_record", zoomable: true },
-  { id: "damaged_name_tag", title: "破損したネームタグ", category: "ITEM", description: "A—— N——。カメラバッグに残っていた断片。", image: "damaged_name_tag", zoomable: true },
+  { id: "damaged_name_tag", title: "破損したネームタグ", category: "ITEM", description: "古いネームタグ。表面には擦れと汚れがあり、文字の一部が欠けている。姓は「相沢」、名前は「直――」まで確認できる。裏面には薄く手書きされた「相沢 直樹」の文字が残っている。", image: "damaged_name_tag", zoomable: true },
   { id: "group_photo_hq", title: "17:18 反射部復元", category: "PHOTO", description: "ガラスにカメラを構える人物が薄く映る。", image: "group_1718_hq", zoomable: true },
   { id: "naoki_0612_photo", title: "NAOKI_0815_0612.jpg", category: "PHOTO", description: "橋の崩落から6時間16分後。路上を歩く人物。", image: "naoki_0612", zoomable: true },
   { id: "vehicle_1723_record", title: "17:23 山荘前記録", category: "PHOTO", description: "山荘前に停車する濃紺のSUV。左後部の傷と山型ステッカーを確認できる。", image: "vehicle_1723_record", zoomable: true },
