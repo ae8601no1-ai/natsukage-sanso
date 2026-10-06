@@ -1,3 +1,11 @@
+export const kuseSuvVisualSpec = {
+  color: "濃紺",
+  view: "右後方",
+  damage: "左後部",
+  sticker: "白い山型シルエット／リアウィンドウ中央下部",
+  rearTireCover: false,
+} as const;
+
 export const assetSlots: Record<string, { src: string; position?: string; crop?: string }> = {
   lodge_arrival_1637: { src: "/assets/generated/lodge_arrival_1637.png", position: "center" },
   living_seven_cups: { src: "/assets/generated/living_seven_cups.png", position: "center" },
@@ -15,7 +23,7 @@ export const assetSlots: Record<string, { src: string; position?: string; crop?:
   suv_night: { src: "/assets/generated/kuse_suv_night.png", position: "center" },
   group_1718: { src: "/assets/generated/group_1718.png", position: "center" },
   group_1718_hq: { src: "/assets/generated/group_1718_hq.png", position: "center" },
-  vehicle_1723_record: { src: "/assets/generated/true_end_group_1723.png", position: "center" },
+  vehicle_1723_record: { src: "/assets/generated/vehicle_1723_archive.png", position: "center" },
   vehicle_2235_record: { src: "/assets/generated/crime_2231.png", position: "center" },
   crime_2231: { src: "/assets/generated/crime_2231.png", position: "center" },
   bridge: { src: "/assets/generated/bridge_collapse.png", position: "center" },

@@ -5,7 +5,7 @@ import { validateFinal, validateFinalFields, validateInvestigation, validateInve
 import { endingTitles, sceneMap, scenes } from "../lib/game/scenes.ts";
 import { canUnlockEnd15, initialState, meets } from "../lib/game/state.ts";
 import { visibleCharacterProfiles } from "../lib/game/characters.ts";
-import { assetSlots } from "../lib/game/assets.ts";
+import { assetSlots, kuseSuvVisualSpec } from "../lib/game/assets.ts";
 import { evidence } from "../lib/game/evidence.ts";
 
 const appSource = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
@@ -22,6 +22,14 @@ test("all 15 normal endings and TRUE END are defined", () => {
     assert.ok(endingTitles[id]);
     assert.ok(scenes.some((scene) => scene.ending === id));
   }
+});
+
+test("obtained endings can be reopened without overwriting saved progress", () => {
+  assert.match(appSource, /if \(!state\.endings\.includes\(endingId\)\) return/);
+  assert.match(appSource, /candidate\.ending === endingId/);
+  assert.match(appSource, /setReviewEndingScene\(endingScene\.id\)/);
+  assert.match(appSource, /disabled=\{!obtained\}/);
+  assert.doesNotMatch(appSource, /currentScene: endingScene\.id/);
 });
 
 test("the hidden full name is absent before TRUE ROUTE scenes", () => {
@@ -52,7 +60,7 @@ test("investigation and final answers accept specified variants", () => {
   assert.equal(validateFinal(["アイザワナオキ", "6時間16分", "くぜりゅういち", "久世隆一"]), true);
 });
 
-test("END13 archive evidence identifies Naoki without changing the ending text", async () => {
+test("END13 archive evidence preserves the partial-name clue without changing the ending text", async () => {
   assert.deepEqual(sceneMap.end13.unlockEvidence, ["room_d_seen", "unknown_bag_seen", "unknown_charger", "damaged_name_tag"]);
   assert.equal(sceneMap.end13.text.includes("A—— N——"), true);
   assert.equal(sceneMap.end13.text.includes("相沢直樹"), false);
@@ -61,14 +69,69 @@ test("END13 archive evidence identifies Naoki without changing the ending text",
   assert.ok(nameTag);
   assert.equal(nameTag.image, "damaged_name_tag");
   assert.equal(nameTag.zoomable, true);
-  assert.match(nameTag.description, /姓は「相沢」/);
-  assert.match(nameTag.description, /名前は「直――」/);
-  assert.match(nameTag.description, /相沢 直樹/);
+  assert.match(nameTag.description, /姓は「相沢」と読める/);
+  assert.match(nameTag.description, /名前も一部確認できる/);
+  assert.doesNotMatch(nameTag.description, /相沢\s*直樹|裏面/);
   assert.equal(assetSlots.damaged_name_tag.src, "/assets/generated/damaged_name_tag.png");
 
   const image = await readFile(new URL("../public/assets/generated/damaged_name_tag.png", import.meta.url));
   assert.equal(image.subarray(1, 4).toString(), "PNG");
   assert.ok(image.byteLength > 100_000);
+});
+
+test("archive photo slots use dedicated images matching their evidence descriptions", async () => {
+  assert.equal(assetSlots.vehicle_1723_record.src, "/assets/generated/vehicle_1723_archive.png");
+  assert.equal(assetSlots.wound_record_2250_clean.src, "/assets/generated/wound_record_2250_clean.png");
+  assert.equal(evidence.find((item) => item.id === "vehicle_1723_record")?.description, "山荘前に停車する濃紺のSUV。左後部の傷と山型ステッカーを確認できる。");
+  assert.equal(evidence.find((item) => item.id === "timeline_conflict_wound")?.description, "祠を離れた後の写真。右腕にはまだ傷がない。");
+
+  for (const path of ["../public/assets/generated/vehicle_1723_archive.png", "../public/assets/generated/wound_record_2250_clean.png"]) {
+    const image = await readFile(new URL(path, import.meta.url));
+    assert.equal(image.subarray(1, 4).toString(), "PNG", path);
+    assert.ok(image.byteLength > 100_000, path);
+  }
+});
+
+test("Kuse SUV evidence keeps one canonical vehicle specification", async () => {
+  assert.deepEqual(kuseSuvVisualSpec, {
+    color: "濃紺",
+    view: "右後方",
+    damage: "左後部",
+    sticker: "白い山型シルエット／リアウィンドウ中央下部",
+    rearTireCover: false,
+  });
+  const expectedDescriptions = {
+    kuse_car_seen: "濃紺の車体。左後部の傷と山型ステッカー。",
+    vehicle_1723_record: "山荘前に停車する濃紺のSUV。左後部の傷と山型ステッカーを確認できる。",
+    vehicle_2235_record: "林道脇の濃紺のSUV。左後部の傷と山型ステッカーが17:23の車両と一致する。",
+    kuse_vehicle_match: "左後部の傷、山型ステッカー、ホイール形状が一致。"
+  };
+  for (const [id, description] of Object.entries(expectedDescriptions)) {
+    assert.equal(evidence.find((item) => item.id === id)?.description, description, id);
+  }
+  assert.doesNotMatch(JSON.stringify({ evidence, scenes }), /右後部/);
+
+  const vehicleAssets = [
+    assetSlots.suv.src,
+    assetSlots.suv_night.src,
+    assetSlots.vehicle_1723_record.src,
+    assetSlots.vehicle_2235_record.src,
+    assetSlots.roadcam_0625.src,
+    assetSlots.kuse_naoki_final.src
+  ];
+  assert.deepEqual(vehicleAssets, [
+    "/assets/generated/kuse_suv.png",
+    "/assets/generated/kuse_suv_night.png",
+    "/assets/generated/vehicle_1723_archive.png",
+    "/assets/generated/crime_2231.png",
+    "/assets/generated/roadcam_0625.png",
+    "/assets/generated/kuse_naoki_final.png"
+  ]);
+  for (const src of vehicleAssets) {
+    const image = await readFile(new URL(`../public${src}`, import.meta.url));
+    assert.equal(image.subarray(1, 4).toString(), "PNG", src);
+    assert.ok(image.byteLength > 100_000, src);
+  }
 });
 
 test("END14 and END15 retain the intended seventh-person deduction", () => {
