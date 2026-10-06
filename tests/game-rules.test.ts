@@ -137,6 +137,8 @@ test("Kuse SUV evidence keeps one canonical vehicle specification", async () => 
 test("END14 and END15 retain the intended seventh-person deduction", () => {
   assert.match(sceneMap.end14.text, /これ……誰が撮ったの？/);
   assert.match(sceneMap.end14.text, /カメラを構えた人影/);
+  assert.match(sceneMap.end14.text, /【悠真】\n「……。」\n\n「直樹……？」$/);
+  assert.doesNotMatch(sceneMap.end14.text, /相沢\s*直樹/);
   assert.match(sceneMap.end15.text, /PARTICIPANTS：6[\s\S]*PARTICIPANTS：7[\s\S]*DATA CORRUPTED/);
   assert.equal(validateInvestigation(["7", "はい", "相沢直樹"]), true);
 });
