@@ -1,7 +1,14 @@
 import type { Scene } from "./types";
 
 export const endingTitles: Record<string,string>={END01:"触れてはいけない",END02:"六人目の足音",END03:"傷",END04:"帰れない",END05:"呪われた六人",END06:"見てはいけない写真",END07:"写真を消せ",END08:"管理人",END09:"追跡者",END10:"全員生還",END11:"犯人は藤堂",END12:"23時51分",END13:"空室",END14:"撮影者",END15:"存在しない人",END16:"七人目の夏"};
-const end=(id:string,text:string,unlockEvidence:string[]=[],image?:string):Scene=>({id:id.toLowerCase(),time:"",image,speaker:"",text,ending:id,unlockEvidence,effect:id==="END15"?"glitch":undefined});
+const endingEvidence: Record<string, string[]> = {
+  END01: ["end01_window_record"],
+  END05: ["end05_reflection_record"],
+  END06: ["end06_photo_record"],
+  END07: ["end07_cloud_record"],
+  END11: ["end11_alibi_record"],
+};
+const end=(id:string,text:string,unlockEvidence:string[]=[],image?:string):Scene=>({id:id.toLowerCase(),time:"",image,speaker:"",text,ending:id,unlockEvidence:[...new Set([...unlockEvidence, ...(endingEvidence[id] ?? [])])],effect:id==="END15"?"glitch":undefined});
 
 const baseScenes:Scene[]=[
   {id:"arrival",time:"AUGUST 14",speaker:"悠真・モノローグ",text:"大学最後の夏だった。\n\n佐久間が見つけてきた山奥の貸山荘で、\n\n一泊して、\n\nバーベキューをして、\n\nくだらない話をして。\n\nそれだけの旅行になるはずだった。",nextScene:"arrival_time"},
@@ -41,8 +48,8 @@ const baseScenes:Scene[]=[
   {id:"crime_photo",time:"22:31",image:"crime_2231",speaker:"美咲／悠真",text:"「……これ」\n\n「人？」\n\n「拡大して」",choices:[{label:"拡大する",nextScene:"end06"},{label:"削除する",nextScene:"end07"},{label:"山荘へ戻る",nextScene:"invasion"}]},
   {id:"kuse_notice",time:"22:35",image:"crime_2231",speaker:"男／美咲",text:"「……！」\n\n「逃げて！」\n\n「待ってくれ！」\n\n「違うんだ！」",nextScene:"invasion"},
   {id:"invasion",time:"23:21",speaker:"小宮／悠真",text:"「写真消して！」\n\n「でも――」\n\n「それが欲しいんでしょ！」",choices:[{label:"スマホを隠す",nextScene:"end08",unlockEvidence:["kuse_car_seen"]},{label:"写真を削除",nextScene:"end07"},{label:"外へ逃げる",nextScene:"chase"}]},
-  {id:"chase",time:"",speaker:"UNKNOWN／悠真",text:"写真を返してくれ\n\n誰も傷つけるつもりはない\n\n「……何なんだよ」",choices:[{label:"返信する",nextScene:"reply_unknown",unlockEvidence:["unknown_messages"]},{label:"スマホを捨てる",nextScene:"end09",unlockEvidence:["unknown_messages"]},{label:"警察へ電話する",nextScene:"end10",unlockEvidence:["survival_record"]}]},
-  {id:"reply_unknown",time:"",speaker:"悠真・入力／UNKNOWN／悠真",text:"あなたは誰ですか\n\n写真だけ返してくれ\n\nそれで終わる\n\n「信用できるかよ……」",nextScene:"end09"},
+  {id:"chase",time:"",speaker:"UNKNOWN／悠真",text:"【UNKNOWN】\n写真を返してくれ\n\n誰も傷つけるつもりはない\n\n「……何なんだよ」",choices:[{label:"返信する",nextScene:"reply_unknown",unlockEvidence:["unknown_messages"]},{label:"スマホを捨てる",nextScene:"end09",unlockEvidence:["unknown_messages"]},{label:"警察へ電話する",nextScene:"end10",unlockEvidence:["survival_record"]}]},
+  {id:"reply_unknown",time:"",speaker:"悠真・入力／UNKNOWN／悠真",text:"【悠真・入力】\nあなたは誰ですか\n\n【UNKNOWN】\n写真だけ返してくれ\n\nそれで終わる\n\n「信用できるかよ……」",nextScene:"end09"},
   {id:"murder_stay",time:"22:15",speaker:"悠真／小宮／森川／佐久間",text:"「俺はやめとく」\n\n「私も」\n\n「つまんねーの」\n\n「雨も降りそうだしな」",nextScene:"body_found"},
   {id:"body_found",time:"23:48",speaker:"美咲／小宮／悠真／藤堂／森川／悠真・モノローグ",text:"「佐久間、どこ行った？」\n\n「さっき二階にいた」\n\n俺たちは手分けして山荘内を探し、二階へ上がった。\n\nドン。\n\n「亮！」\n\n「触らないで！」\n\n「佐久間！」\n\n「……死んでる」\n\n「嘘だろ」\n\nこの山荘にいるのは、\n\n俺たちだけ。\n\nなら。\n\n佐久間を殺したのは――\n\nここにいる誰かだ。",nextScene:"murder_investigation"},
   {id:"murder_investigation",time:"",speaker:"システム",text:"調べる場所を選んでください。",choices:[{label:"藤堂が犯人だ",nextScene:"end11"},{label:"佐久間のスマートフォン",nextScene:"message_2351"},{label:"空室D",nextScene:"unknown_room"},{label:"集合写真再検証",nextScene:"photographer_question",conditions:[{endingsAny:["END02","END13"]}]}]},
@@ -50,7 +57,7 @@ const baseScenes:Scene[]=[
   {id:"unknown_room",time:"",image:"unknown_camera_bag",speaker:"悠真／小宮／美咲",text:"「これ……」\n\n「誰の？」\n\nA—— N——\n\n「私たちのじゃないよね」\n\n「……。」",nextScene:"end13"},
   {id:"photographer_question",time:"IMG_0814_171842_HQ.jpg",image:"group_1718_hq",speaker:"美咲／悠真",text:"「……悠真」\n\n「何？」\n\n「この写真」\n\n「佐久間」\n\n「森川」\n\n「私」\n\n「彩香」\n\n「藤堂」\n\n「悠真」\n\n「それが？」\n\n「これ」\n\n「誰が撮ったの？」",nextScene:"end14"},
   {id:"empty_seat",time:"18:05",image:"bbq_1805",speaker:"悠真／佐久間／森川",text:"「……。」\n\n「どうした？」\n\n「ここ」\n\n「誰か座ってなかったか？」\n\n「は？」\n\n「いや……」\n\n「誰か……」\n\n「飲みすぎじゃね？」",nextScene:"unknown_phone",unlockEvidence:["seen_7_cups","receipt_partial"]},
-  {id:"unknown_phone",time:"02:17",speaker:"UNKNOWN／悠真",text:"「……誰のだ？」\n\n忘れたの？\n\n「……？」\n\n俺もいたよ。\n\n「誰だ……？」\n\n悠真。\n\n「……なんで」\n\n「俺の名前を……」\n\nPARTICIPANTS：6\n\nPARTICIPANTS：7\n\nDATA CORRUPTED",nextScene:"end15",effect:"glitch"},
+  {id:"unknown_phone",time:"02:17",speaker:"UNKNOWN／悠真",text:"「……誰のだ？」\n\n【UNKNOWN】\n忘れたの？\n\n「……？」\n\n【UNKNOWN】\n俺もいたよ。\n\n「誰だ……？」\n\n【UNKNOWN】\n悠真。\n\n「……なんで」\n\n「俺の名前を……」\n\nPARTICIPANTS：6\n\nPARTICIPANTS：7\n\nDATA CORRUPTED",nextScene:"end15",effect:"glitch"},
   end("END01","玄関の鍵を外し、扉を開ける。\n\n外には誰もいない。\n\n暗い駐車場に雨の音だけが響いている。\n\n扉を閉めようとした時、俺は玄関に森川の靴が残っていることに気づいた。\n\n【悠真】\n「森川は？」\n\n誰も答えられなかった。\n\nトイレにもいない。\n\n二階にもいない。\n\n俺たちは懐中電灯を持って、もう一度山道へ戻った。\n\nそして祠の前で、もう一足の靴を見つけた。\n\n森川が履いていたものだった。\n\nだが、その先に足跡はなかった。\n\n翌朝、警察が来た。\n\n山狩りも行われた。\n\nそれでも森川は見つからなかった。\n\n数日後。\n\n美咲から一枚の写真が送られてきた。\n\n8月15日、午前8時14分。\n\n誰もいないはずの山荘。\n\n二階の窓。\n\nそこに、人影が立っていた。\n\n拡大する。\n\n輪郭だけなら――森川に見えた。\n\n【悠真】\n「……森川？」"),
   end("END02","廊下を歩く足音を一人ずつ数える。\n\n俺。\n\n佐久間。\n\n森川。\n\n美咲。\n\n彩香。\n\n藤堂。\n\nそして――\n\nもう一つ。\n\n【美咲】\n「待って」\n\n全員が止まる。\n\nそれでも。\n\nギ……\n\n床板が一度だけ鳴った。\n\n俺たちの少し後ろで。\n\n振り返っても誰もいない。\n\nその夜、寝室Dを調べた。\n\n使っていないはずのベッド。\n\nだがシーツには、人が横になったような皺がある。\n\n枕元には空のペットボトル。\n\nコンセントには充電ケーブル。\n\n【悠真】\n「……誰か」\n\n「ここにいた？」\n\n答えられる者はいなかった。",["room_d_seen"]),
   end("END03","悠真は自分の右腕を見る。\n\n深い擦過傷。\n\n血はすでに乾き始めている。\n\n【悠真】\n「いつ……やった？」\n\n俺は祠の近くで傷を負ったのだと思っていた。\n\nしかしARCHIVEに新しい画像が現れる。\n\nIMG_0814_225012.jpg\n\n22:50。\n\n暗い山道。\n\n美咲が移動中に撮った写真の端に、俺の右腕が写っている。\n\n傷は、まだない。\n\nROUTE MEMORY：\n「祠で負傷」\n\nPHOTO RECORD：\n22:50 / RIGHT ARM UNINJURED\n\nMEMORY CONFLICT\n\n【悠真】\n「……違う」\n\n「祠じゃない」\n\n「俺は……どこで怪我した？」",["timeline_conflict_wound"],"wound_record_2250_clean"),
@@ -92,7 +99,7 @@ const baseScenes:Scene[]=[
   {id:"yuma_decision",time:"現在",speaker:"悠真",text:"「俺も同じだった」\n\n「怖かった」\n\n「橋の下に直樹がいたのに」\n\n「逃げた」\n\n「でも」\n\n「そんな8月14日は」\n\n「一度もなかった」\n\n「あなたが見つけた」\n\n「俺が消した直樹を」\n\n「俺が見なかった続きを」\n\n「だから」\n\n「今度は逃げない」",nextScene:"evidence_package"},
   {id:"evidence_package",time:"EVIDENCE PACKAGE COMPLETE",speaker:"悠真",text:"「警察に持っていく」\n\n「大槻さんのことも」\n\n「直樹のことも」\n\n「全部」\n\n「今度こそ」\n\n「最後まで」",nextScene:"finish_prompt"},
   {id:"finish_prompt",time:"",image:"true_end",speaker:"",text:"8月14日を終了しますか？",choices:[{label:"終了する",nextScene:"end16"}]},
-  {id:"end16",time:"AUGUST 14 / 17:23",image:"true_end",speaker:"悠真",text:"「ずっと、直樹を助けられる選択肢を探してた。」\n\n「あの夜を変えられると思ってた。」\n\n「でも違った。」\n\n「やり直すんじゃなかった。」\n\n「何があったのか、最後まで見るべきだった。」\n\n「直樹。」\n\n「今度こそ、ちゃんと覚えてる。」",ending:"END16"},
+  {id:"end16",time:"AUGUST 14 / 17:23",image:"true_end",speaker:"悠真",text:"「ずっと、直樹を助けられる選択肢を探してた。」\n\n「あの夜を変えられると思ってた。」\n\n「でも違った。」\n\n「やり直すんじゃなかった。」\n\n「何があったのか、最後まで見るべきだった。」\n\n「直樹。」\n\n「今度こそ、ちゃんと覚えてる。」",ending:"END16",unlockEvidence:["end16_restored_record"]},
 ];
 
 const speakerSequences: Record<string, string[]> = {
@@ -100,11 +107,11 @@ const speakerSequences: Record<string, string[]> = {
   ask_lodge:["悠真","久世","久世","久世","久世"], ask_tunnel:["悠真","久世","森川","久世","久世","森川","久世","久世"], ask_nothing:["悠真","久世"],
   explore_intro:["佐久間","美咲"], explore_living:["悠真","森川","小宮"], explore_kitchen:["悠真","佐久間","悠真","佐久間"],
   explore_roomd:["悠真","悠真","美咲","悠真","悠真","美咲","悠真"], explore_parking:["佐久間","悠真","佐久間"], explore_bags:["悠真","森川・遠くから","悠真"],
-  photo_setup:["美咲","佐久間"], photo_look:["悠真","美咲","藤堂"], photo_send:["悠真","美咲"], bbq:["佐久間","佐久間","森川","小宮","森川"],
+  photo_setup:["美咲","佐久間"], photo_look:["悠真","美咲","藤堂"], photo_send:["悠真","美咲"], bbq:["佐久間","全員","森川","小宮","森川"],
   test_proposal:["森川","森川","小宮","森川","佐久間","森川","小宮","美咲","藤堂","森川"], night_road:["小宮","森川","佐久間","美咲","藤堂"],
   tunnel:["森川","小宮","森川"], shrine:["小宮","森川"], shrine_touch:["悠真","佐久間","森川","森川","小宮"], lodge_knock:["美咲","藤堂","佐久間","森川","小宮"],
   seven_steps:["美咲","悠真","美咲"], roomd_night:["悠真","悠真","悠真","小宮"], wound_appears:["悠真","森川","悠真","森川","美咲","悠真","美咲","悠真","森川","悠真"],
-  forest_light:["悠真","悠真","悠真"], crime_photo:["美咲","悠真","美咲"], kuse_notice:["男","美咲","男","男"],
+  forest_light:["悠真","美咲","悠真"], crime_photo:["美咲","悠真","美咲"], kuse_notice:["男","美咲","男","男"],
   invasion:["小宮","悠真","小宮"], chase:["悠真"], reply_unknown:["悠真"], murder_stay:["悠真","小宮","森川","佐久間"],
   body_found:["美咲","藤堂","美咲","小宮","悠真","藤堂","森川"], message_2351:["悠真","美咲","悠真","藤堂","森川"], unknown_room:["悠真","小宮","美咲","悠真"],
   photographer_question:["美咲","悠真","美咲","美咲","美咲","美咲","美咲","悠真","美咲","悠真","美咲","美咲"], empty_seat:["悠真","佐久間","悠真","悠真","佐久間","悠真","悠真","森川"],

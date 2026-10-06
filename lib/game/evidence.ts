@@ -18,4 +18,10 @@ export const evidence: Evidence[] = [
   { id: "vehicle_2235_record", title: "22:35 林道記録", category: "PHOTO", description: "林道脇の濃紺のSUV。左後部の傷と山型ステッカーが17:23の車両と一致する。", image: "vehicle_2235_record", zoomable: true },
   { id: "kuse_vehicle_match", title: "06:25 路肩カメラ", category: "PHOTO", description: "左後部の傷、山型ステッカー、ホイール形状が一致。", image: "roadcam_0625", zoomable: true },
   { id: "final_audio", title: "06:25 音声照合", category: "RECORD", description: "負傷した直樹へ『病院まで送る』と声をかけた人物。管理人記録の音声と照合し、久世隆一と一致。" },
+  { id: "end01_window_record", title: "8月15日 08:14 二階の窓", category: "PHOTO", description: "誰もいないはずの山荘。その二階の窓に、森川に似た人影が残っている。" },
+  { id: "end05_reflection_record", title: "窓ガラスの反射", category: "UNKNOWN", description: "悠真の背後に、消えた五人と見覚えのないもう一人が並んでいる。" },
+  { id: "end06_photo_record", title: "IMG_0814_2231XX.jpg", category: "PHOTO", description: "22:31。倒れた人物と、その横から撮影者を見返す男が写っている。", image: "crime_2231", zoomable: true },
+  { id: "end07_cloud_record", title: "CLOUD SYNC復元画像", category: "PHOTO", description: "削除後に復元された破損写真。倒れた人物、男、画面端の車が残っている。", image: "crime_2231", zoomable: true },
+  { id: "end11_alibi_record", title: "藤堂隔離記録", category: "RECORD", description: "藤堂を施錠した部屋へ隔離した後、別の場所で新たな被害が発生した。" },
+  { id: "end16_restored_record", title: "AUGUST 14 / 17:23", category: "PHOTO", description: "欠落していた七人目を含む、夏影山荘前の集合写真。", image: "true_end", zoomable: true },
 ];

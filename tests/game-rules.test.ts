@@ -1,11 +1,14 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import { validateFinal, validateFinalFields, validateInvestigation, validateInvestigationFields } from "../lib/game/answers.ts";
 import { endingTitles, sceneMap, scenes } from "../lib/game/scenes.ts";
 import { canUnlockEnd15, initialState, meets } from "../lib/game/state.ts";
 import { visibleCharacterProfiles } from "../lib/game/characters.ts";
 import { assetSlots } from "../lib/game/assets.ts";
 import { evidence } from "../lib/game/evidence.ts";
+
+const appSource = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
 
 test("END15 requires eight distinct endings and every required ending", () => {
   assert.equal(canUnlockEnd15({ ...initialState, endings: ["END03", "END10", "END13", "END14", "END01", "END02", "END04"] }), false);
@@ -141,7 +144,7 @@ test("reviewed ending continuity issues remain fixed", () => {
   assert.equal(sceneMap.end04.text.includes("さっき、なかった"), false);
   assert.equal(sceneMap.end04.image, "suv_night");
   assert.equal(sceneMap.end06.text.includes("急いで山荘へ戻った"), true);
-  assert.deepEqual(sceneMap.end07.unlockEvidence, []);
+  assert.deepEqual(sceneMap.end07.unlockEvidence, ["end07_cloud_record"]);
   assert.equal(sceneMap.end08.text.includes("管理人を頼るしかなかった"), true);
   assert.equal(sceneMap.end08.image, "suv_night");
   assert.equal(sceneMap.end11.text.includes("【佐久間】"), false);
@@ -195,4 +198,28 @@ test("Sakuma is searched for before he is found", () => {
   const found = text.indexOf("……死んでる");
   assert.ok(missing >= 0 && search > missing && found > search);
   assert.equal(text.slice(0, search).includes("佐久間を見つけた"), false);
+});
+
+test("reviewed dialogue assigns the intended speaker to every line", () => {
+  assert.match(sceneMap.bbq.text, /【佐久間】\n「乾杯！」\n\n【全員】\n「乾杯！」/);
+  assert.match(sceneMap.forest_light.text, /【悠真】\n「あれ……」\n\n【美咲】\n「何？」\n\n【悠真】\n「向こう」/);
+  assert.match(sceneMap.chase.text, /【UNKNOWN】\n写真を返してくれ/);
+  assert.match(sceneMap.reply_unknown.text, /【悠真・入力】\nあなたは誰ですか/);
+  assert.equal((sceneMap.unknown_phone.text.match(/【UNKNOWN】/g) ?? []).length, 3);
+});
+
+test("every ending unlocks at least one archive record", () => {
+  for (let n = 1; n <= 16; n++) {
+    const id = `END${String(n).padStart(2, "0")}`;
+    const endingScenes = scenes.filter((scene) => scene.ending === id);
+    assert.ok(endingScenes.some((scene) => (scene.unlockEvidence?.length ?? 0) > 0), id);
+    for (const evidenceId of endingScenes.flatMap((scene) => scene.unlockEvidence ?? [])) {
+      assert.ok(evidence.some((item) => item.id === evidenceId), `${id}: ${evidenceId}`);
+    }
+  }
+});
+
+test("the final gate button describes its actual destination", () => {
+  assert.match(appSource, /state\.currentScene === "final_gate"[\s\S]*最終捜査へ/);
+  assert.doesNotMatch(appSource, /未確認ファイルを見る/);
 });
