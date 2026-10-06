@@ -223,3 +223,14 @@ test("the final gate button describes its actual destination", () => {
   assert.match(appSource, /state\.currentScene === "final_gate"[\s\S]*最終捜査へ/);
   assert.doesNotMatch(appSource, /未確認ファイルを見る/);
 });
+
+test("SIM3 clear registration is exposed only for TRUE END", () => {
+  const clearUrl = "https://sim3.net/portal/clear/#90a3b7430bd14082b7d3ddaefb6702df";
+  assert.equal(appSource.split(clearUrl).length - 1, 1);
+  assert.match(appSource, /const SIM3_CLEAR_URL = "https:\/\/sim3\.net\/portal\/clear\/#90a3b7430bd14082b7d3ddaefb6702df"/);
+  assert.match(appSource, /scene\.ending === "END16" && <section className="journey-record"/);
+  assert.match(appSource, /<h2 id="journey-record-title">旅の記録<\/h2>/);
+  assert.match(appSource, /この夏の出来事を、<br \/>記録として残しますか。/);
+  assert.match(appSource, /<a href=\{SIM3_CLEAR_URL\} target="_blank" rel="noopener noreferrer">この旅の記録を残す<\/a>/);
+  assert.match(appSource, /<button className="primary" onClick=\{\(\) => setScreen\("title"\)\}>TITLE<\/button>/);
+});
