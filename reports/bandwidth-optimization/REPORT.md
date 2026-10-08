@@ -13,7 +13,7 @@
 - `tests/bandwidth.test.ts`：派生画像の存在、原寸保持、参照、サイズ予算の検証。
 - `public/assets/display/`：24画像。原寸PNGは削除・変更なし。
 
-ストーリー、scene/evidence ID、フラグ、localStorage、認証、SIM3、Render設定・health checkは変更なし。
+ストーリー、scene/evidence ID、フラグ、localStorage、認証、SIM3、Renderサービス設定・health checkは変更なし。起動スクリプトは下記理由で変更。
 
 ## B. 新規画像（MBは1,000,000 bytes）
 
@@ -95,7 +95,8 @@ ARCHIVEの旧37.18MBと新1.03MBは一覧用の全ファイルを比較した値
 - Chromium相当390×844で新規認証・人物・END01・ARCHIVE・拡大を操作。サムネイルと人物識別に問題なし。端末実機/Safariは未検証。
 - ブラウザの観測アセット一覧で初回7人が表示用WebPであり、人物の原寸PNGが取得対象にないことを確認。認証画面背景の到着PNGは従来通り読み込む。
 - DevToolsの転送量実測値は取得できていないため、以下は取得URL集合と実ファイルサイズに基づく推計。ローカル開発JSサイズは本番推計に使わない。
-- キャッシュ設定は既存のまま。固定画像`public, max-age=0, must-revalidate`、ETag付き。JS/CSSのimmutableは維持。HTTP再検証結果は公開確認記録に追記。
+- 当初はキャッシュを変更せず公開したが、既存Wrangler起動の内部ポートをRenderが誤検出（39039）し502が発生。`scripts/start-render.mjs`を標準`vinext start`へ切替。公開HTTPポートのみで動作させる。
+- Node本番モードの新規認証・END01操作をChromeで検証。画像レスポンスは`public, max-age=3600`、ETag、Last-Modified付き。固定URLにimmutableは付かない。JS/CSSはハッシュ付きURLのimmutableを維持。公開再検証記録に応答を保存。
 
 ## I. 想定1プレイ転送量
 
@@ -114,3 +115,7 @@ ARCHIVEの旧37.18MBと新1.03MBは一覧用の全ファイルを比較した値
 
 ![PC TRUE END](true-end-pc.jpg)
 ![スマホ ARCHIVE](archive-mobile.jpg)
+
+## 公開起動方式の追加修正
+
+最初の画像公開コミット：`d5ee91b801886dc887cda6a23e1d53821707771a`。RenderでLiveになった後に502が返り、ログに内部ポート誤検出とworkerd RPCエラーを確認。画像変更に由来するエラーではない。標準Node本番サーバーへ起動のみ切替。サービスURL・プラン・healthCheckPathは維持。
