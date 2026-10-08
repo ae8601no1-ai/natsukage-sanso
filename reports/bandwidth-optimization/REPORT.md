@@ -119,3 +119,19 @@ ARCHIVEの旧37.18MBと新1.03MBは一覧用の全ファイルを比較した値
 ## 公開起動方式の追加修正
 
 最初の画像公開コミット：`d5ee91b801886dc887cda6a23e1d53821707771a`。RenderでLiveになった後に502が返り、ログに内部ポート誤検出とworkerd RPCエラーを確認。画像変更に由来するエラーではない。標準Node本番サーバーへ起動のみ切替。サービスURL・プラン・healthCheckPathは維持。
+
+## 公開後の確認結果
+
+- 公開コミット：`b862befcfff75587f891dddc90f965070d695cc2`。
+- Render：Live（起動修正のデプロイ時間2分43秒）。
+- 確認日時：2026-10-08T18:03:59.723620+09:00
+- トップ＋24派生画像：全25 URLがHTTP 200。全派生画像Content-Type `image/webp`。
+- 固定画像：`public, max-age=3600`、ETag、Last-Modifiedあり。If-None-MatchでHTTP 304。
+- 公開版：人物紹介で幅768のWebP、ARCHIVEで軽量サムネイル、レシート拡大で原寸PNGを確認。
+- 公開版の既存テストセーブを維持してEND01/02/03/04/05/10/13/14/15、INVESTIGATION、TRUE ROUTE、最終捜査、TRUE ENDまでUI操作。公開版クリア後リロード→つづきからでTRUE ENDとSIM3リンクを復元。
+- 新規認証は開発モードとNode本番モードの空ローカルセーブで確認。本番の認証済みセーブは削除していない。
+- 起動方式切替後、Node本番モードでも同じ9END＋TRUE ENDを再テスト。
+- 詳細レスポンスは`public-verification.json`。公開後の累積月間帯域低下はまだ測定できない。
+
+![公開版 人物紹介](public-characters.jpg)
+![公開版 ARCHIVE](public-archive.jpg)
