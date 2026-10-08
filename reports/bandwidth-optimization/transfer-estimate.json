@@ -1,0 +1,192 @@
+{
+  "routeScenes": 69,
+  "beforeSceneImages": 57079932,
+  "afterSceneImages": 53721200,
+  "beforeCharacters": 15437602,
+  "afterCharacters": 711274,
+  "archiveThumbnails": 1033900,
+  "before": [
+    {
+      "url": "/assets/generated/pretrip_rumor.png",
+      "bytes": 2001631
+    },
+    {
+      "url": "/assets/generated/lodge_arrival_1637.png",
+      "bytes": 2966107
+    },
+    {
+      "url": "/assets/generated/living_seven_cups.png",
+      "bytes": 2241280
+    },
+    {
+      "url": "/assets/generated/group_1718.png",
+      "bytes": 2467475
+    },
+    {
+      "url": "/assets/generated/bbq_1805.png",
+      "bytes": 2479514
+    },
+    {
+      "url": "/assets/generated/night_road_2136.png",
+      "bytes": 2742815
+    },
+    {
+      "url": "/assets/generated/tunnel_shrine_six_2202.png",
+      "bytes": 2540897
+    },
+    {
+      "url": "/assets/generated/lodge_return_night_2310.png",
+      "bytes": 2555836
+    },
+    {
+      "url": "/assets/generated/wound_record_2250_clean.png",
+      "bytes": 2246805
+    },
+    {
+      "url": "/assets/generated/lodge_blackout_2310.png",
+      "bytes": 2555836
+    },
+    {
+      "url": "/assets/generated/kuse_suv_night.png",
+      "bytes": 2508194
+    },
+    {
+      "url": "/assets/generated/forest_light_2227.png",
+      "bytes": 1841495
+    },
+    {
+      "url": "/assets/generated/crime_2231.png",
+      "bytes": 2532708
+    },
+    {
+      "url": "/assets/generated/unknown_camera_bag.png",
+      "bytes": 2211807
+    },
+    {
+      "url": "/assets/generated/group_1718_hq.png",
+      "bytes": 2627267
+    },
+    {
+      "url": "/assets/generated/true_end_group_1723.png",
+      "bytes": 2725360
+    },
+    {
+      "url": "/assets/generated/room_d_true.png",
+      "bytes": 2119558
+    },
+    {
+      "url": "/assets/generated/tunnel_shrine_2202.png",
+      "bytes": 2676647
+    },
+    {
+      "url": "/assets/generated/true_wound_2251.png",
+      "bytes": 2314429
+    },
+    {
+      "url": "/assets/generated/bridge_collapse.png",
+      "bytes": 2510521
+    },
+    {
+      "url": "/assets/generated/naoki_0815_0612.png",
+      "bytes": 2941696
+    },
+    {
+      "url": "/assets/generated/roadcam_0625.png",
+      "bytes": 2874020
+    },
+    {
+      "url": "/assets/generated/kuse_naoki_final.png",
+      "bytes": 2398034
+    }
+  ],
+  "after": [
+    {
+      "url": "/assets/generated/pretrip_rumor.png",
+      "bytes": 2001631
+    },
+    {
+      "url": "/assets/generated/lodge_arrival_1637.png",
+      "bytes": 2966107
+    },
+    {
+      "url": "/assets/generated/living_seven_cups.png",
+      "bytes": 2241280
+    },
+    {
+      "url": "/assets/generated/group_1718.png",
+      "bytes": 2467475
+    },
+    {
+      "url": "/assets/generated/bbq_1805.png",
+      "bytes": 2479514
+    },
+    {
+      "url": "/assets/generated/night_road_2136.png",
+      "bytes": 2742815
+    },
+    {
+      "url": "/assets/generated/tunnel_shrine_six_2202.png",
+      "bytes": 2540897
+    },
+    {
+      "url": "/assets/display/lodge_blackout_2310_lossless.webp",
+      "bytes": 1752940
+    },
+    {
+      "url": "/assets/generated/wound_record_2250_clean.png",
+      "bytes": 2246805
+    },
+    {
+      "url": "/assets/generated/kuse_suv_night.png",
+      "bytes": 2508194
+    },
+    {
+      "url": "/assets/generated/forest_light_2227.png",
+      "bytes": 1841495
+    },
+    {
+      "url": "/assets/generated/crime_2231.png",
+      "bytes": 2532708
+    },
+    {
+      "url": "/assets/generated/unknown_camera_bag.png",
+      "bytes": 2211807
+    },
+    {
+      "url": "/assets/generated/group_1718_hq.png",
+      "bytes": 2627267
+    },
+    {
+      "url": "/assets/generated/true_end_group_1723.png",
+      "bytes": 2725360
+    },
+    {
+      "url": "/assets/generated/room_d_true.png",
+      "bytes": 2119558
+    },
+    {
+      "url": "/assets/generated/tunnel_shrine_2202.png",
+      "bytes": 2676647
+    },
+    {
+      "url": "/assets/generated/true_wound_2251.png",
+      "bytes": 2314429
+    },
+    {
+      "url": "/assets/generated/bridge_collapse.png",
+      "bytes": 2510521
+    },
+    {
+      "url": "/assets/generated/naoki_0815_0612.png",
+      "bytes": 2941696
+    },
+    {
+      "url": "/assets/generated/roadcam_0625.png",
+      "bytes": 2874020
+    },
+    {
+      "url": "/assets/generated/kuse_naoki_final.png",
+      "bytes": 2398034
+    }
+  ]
+}

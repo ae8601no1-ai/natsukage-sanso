@@ -1,0 +1,242 @@
+[
+  {
+    "kind": "character",
+    "original": "public/assets/generated/character_aizawa_naoki.png",
+    "output": "public/assets/display/character_aizawa_naoki_display.webp",
+    "before": 2277658,
+    "after": 104114,
+    "width": 768,
+    "height": 1152,
+    "original_sha256": "76dca5b2ed50900d0c89b3bae0485f2143c8fe93459d95069bfd39144444d1a3"
+  },
+  {
+    "kind": "character",
+    "original": "public/assets/generated/character_komiya_ayaka.png",
+    "output": "public/assets/display/character_komiya_ayaka_display.webp",
+    "before": 2203171,
+    "after": 112134,
+    "width": 768,
+    "height": 1152,
+    "original_sha256": "b623c478812330582c7d6d431ed92aac6f87e3d3bc0e854202169f9dd82dfc42"
+  },
+  {
+    "kind": "character",
+    "original": "public/assets/generated/character_kuze_ryuichi.png",
+    "output": "public/assets/display/character_kuze_ryuichi_display.webp",
+    "before": 2094327,
+    "after": 105914,
+    "width": 768,
+    "height": 1152,
+    "original_sha256": "1c640f26cf6118f0ffdb8d1ba6ca749bde065c949cd809aab7efa1774bc2747c"
+  },
+  {
+    "kind": "character",
+    "original": "public/assets/generated/character_mizuno_misaki.png",
+    "output": "public/assets/display/character_mizuno_misaki_display.webp",
+    "before": 2312871,
+    "after": 124378,
+    "width": 768,
+    "height": 1152,
+    "original_sha256": "90b5bb7aa5b4252a65b63b72364a7f890110ae9ac4dd27387426c6fda065e5e7"
+  },
+  {
+    "kind": "character",
+    "original": "public/assets/generated/character_morikawa_takumi.png",
+    "output": "public/assets/display/character_morikawa_takumi_display.webp",
+    "before": 2159124,
+    "after": 96294,
+    "width": 768,
+    "height": 1152,
+    "original_sha256": "240d4d3f0836e4dc6f78625c7883ec9909d6299153f272ddc1b1bdce88a080ac"
+  },
+  {
+    "kind": "character",
+    "original": "public/assets/generated/character_sakuma_ryo.png",
+    "output": "public/assets/display/character_sakuma_ryo_display.webp",
+    "before": 2296728,
+    "after": 111578,
+    "width": 768,
+    "height": 1152,
+    "original_sha256": "7c064c843d5d414b091bd2eb0f36f9237beb53413d0d3bc3ec440ccce5422b39"
+  },
+  {
+    "kind": "character",
+    "original": "public/assets/generated/character_takase_yuma.png",
+    "output": "public/assets/display/character_takase_yuma_display.webp",
+    "before": 2191649,
+    "after": 76518,
+    "width": 768,
+    "height": 1152,
+    "original_sha256": "4b1b4015610e3e1d096c35a2e82b9460609faf1cf5bb5d5b1a1bf04460d32d25"
+  },
+  {
+    "kind": "character",
+    "original": "public/assets/generated/character_todo_keisuke.png",
+    "output": "public/assets/display/character_todo_keisuke_display.webp",
+    "before": 2179732,
+    "after": 84458,
+    "width": 768,
+    "height": 1152,
+    "original_sha256": "eafc9246b8f5dc916d17c6fde6133e40a966f3f083edb831855decc23364c4d2"
+  },
+  {
+    "kind": "archive",
+    "original": "public/assets/generated/crime_2231.png",
+    "output": "public/assets/display/crime_2231_thumb.webp",
+    "before": 2532708,
+    "after": 68622,
+    "width": 640,
+    "height": 360,
+    "original_sha256": "797d3ae749ba223a53553c69534eb5e77adac6610cbb3420a97cf2fbdf1818d1"
+  },
+  {
+    "kind": "archive",
+    "original": "public/assets/generated/damaged_name_tag.png",
+    "output": "public/assets/display/damaged_name_tag_thumb.webp",
+    "before": 2280895,
+    "after": 55786,
+    "width": 640,
+    "height": 360,
+    "original_sha256": "e53d56c60fcc3741fda473e446aad723c1eb6e47d6d15bb2b323deb9fe7f66b6"
+  },
+  {
+    "kind": "archive",
+    "original": "public/assets/generated/group_1718.png",
+    "output": "public/assets/display/group_1718_thumb.webp",
+    "before": 2467475,
+    "after": 88228,
+    "width": 640,
+    "height": 427,
+    "original_sha256": "3996264570117842dfe3622cbea8db23838452610658db8e8ce247814c8ad6fe"
+  },
+  {
+    "kind": "archive",
+    "original": "public/assets/generated/group_1718_hq.png",
+    "output": "public/assets/display/group_1718_hq_thumb.webp",
+    "before": 2627267,
+    "after": 88928,
+    "width": 640,
+    "height": 427,
+    "original_sha256": "f3ba97a9b41dc3108febc253da9a1d266fe0c64462c9868a8378367b88313a28"
+  },
+  {
+    "kind": "archive",
+    "original": "public/assets/generated/kuse_suv.png",
+    "output": "public/assets/display/kuse_suv_thumb.webp",
+    "before": 2689176,
+    "after": 84214,
+    "width": 640,
+    "height": 360,
+    "original_sha256": "49064cbf417a4da953877b489d3d8dd5f0fc33b8a3a25aa385f5ff937c6ca434"
+  },
+  {
+    "kind": "archive",
+    "original": "public/assets/generated/living_seven_cups.png",
+    "output": "public/assets/display/living_seven_cups_thumb.webp",
+    "before": 2241280,
+    "after": 69888,
+    "width": 640,
+    "height": 427,
+    "original_sha256": "1273c9d3ef095b036e9c34b5357bca84eb0a39b52152802f2e1fb912e564deaa"
+  },
+  {
+    "kind": "archive",
+    "original": "public/assets/generated/naoki_0815_0612.png",
+    "output": "public/assets/display/naoki_0815_0612_thumb.webp",
+    "before": 2941696,
+    "after": 86490,
+    "width": 640,
+    "height": 427,
+    "original_sha256": "ac340ae223db6043fc23f6ca4d150801e13f24daabaf7a8e0d7f86180107408e"
+  },
+  {
+    "kind": "archive",
+    "original": "public/assets/generated/receipt_1528.png",
+    "output": "public/assets/display/receipt_1528_thumb.webp",
+    "before": 2539669,
+    "after": 62684,
+    "width": 640,
+    "height": 427,
+    "original_sha256": "eadc1b98f4f4c52740249934c87dd22363bff38d6064d11379b5a44ebf62f307"
+  },
+  {
+    "kind": "archive",
+    "original": "public/assets/generated/roadcam_0625.png",
+    "output": "public/assets/display/roadcam_0625_thumb.webp",
+    "before": 2874020,
+    "after": 74876,
+    "width": 640,
+    "height": 360,
+    "original_sha256": "f67a2605148dfbd340fa6706384ed21a3a1a2e7d020fe87871c2d309fe652d80"
+  },
+  {
+    "kind": "archive",
+    "original": "public/assets/generated/room_d_charger.png",
+    "output": "public/assets/display/room_d_charger_thumb.webp",
+    "before": 2387772,
+    "after": 50838,
+    "width": 640,
+    "height": 427,
+    "original_sha256": "b63939ff45241959a38fb8e6c3c74c570594348f9abc69f3692590792ebafafb"
+  },
+  {
+    "kind": "archive",
+    "original": "public/assets/generated/survival_record.png",
+    "output": "public/assets/display/survival_record_thumb.webp",
+    "before": 1522610,
+    "after": 9222,
+    "width": 640,
+    "height": 360,
+    "original_sha256": "1f2a146dc80d08b63670dc9d7261608ed5c82d3769f7b39b4ea674918469af26"
+  },
+  {
+    "kind": "archive",
+    "original": "public/assets/generated/true_end_group_1723.png",
+    "output": "public/assets/display/true_end_group_1723_thumb.webp",
+    "before": 2725360,
+    "after": 92166,
+    "width": 640,
+    "height": 427,
+    "original_sha256": "bdd94c6afb05ba2dffd3d1db4b81fbfd73c3e6e7888318199fc18bfd13452cbb"
+  },
+  {
+    "kind": "archive",
+    "original": "public/assets/generated/unknown_camera_bag.png",
+    "output": "public/assets/display/unknown_camera_bag_thumb.webp",
+    "before": 2211807,
+    "after": 50224,
+    "width": 640,
+    "height": 427,
+    "original_sha256": "edd1b9b0c8e1945b4de693024c9f28d99adf4bfaa10d1c266e33cf391634f95c"
+  },
+  {
+    "kind": "archive",
+    "original": "public/assets/generated/vehicle_1723_archive.png",
+    "output": "public/assets/display/vehicle_1723_archive_thumb.webp",
+    "before": 2893700,
+    "after": 99220,
+    "width": 640,
+    "height": 360,
+    "original_sha256": "9f5fb4a2df783dbe0f335db12155978616963c0be50665b1154f6f44181b3e82"
+  },
+  {
+    "kind": "archive",
+    "original": "public/assets/generated/wound_record_2250_clean.png",
+    "output": "public/assets/display/wound_record_2250_clean_thumb.webp",
+    "before": 2246805,
+    "after": 52514,
+    "width": 640,
+    "height": 360,
+    "original_sha256": "953644e69219942fb5d96471beab7724e41956adb8af0974c45539d752983687"
+  },
+  {
+    "kind": "background_lossless",
+    "original": "public/assets/generated/lodge_blackout_2310.png",
+    "output": "public/assets/display/lodge_blackout_2310_lossless.webp",
+    "before": 2555836,
+    "after": 1752940,
+    "width": 1536,
+    "height": 1024,
+    "original_sha256": "91e02e86c028babd9979d16237e2986b82663daeb81ebf428bfa133f6ba51984"
+  }
+]
